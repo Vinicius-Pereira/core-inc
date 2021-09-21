@@ -1,0 +1,144 @@
+/* Animation Get Package Register */
+
+/* Register 1 */
+
+#ursula.get-package-top-long{
+    animation-name              : ursula-sprite-top-long;
+    animation-duration          : 1s;
+    animation-timing-function   : steps(5);
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0s;
+}
+
+#register1.get-package-top-long{
+    animation-name              : hide-package;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0.5s;
+}
+
+/* Register 2 */
+
+#ursula.get-package-top-short{
+    animation-name              : ursula-sprite-top-short;
+    animation-duration          : 1s;
+    animation-timing-function   : steps(4);
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0s;
+}
+
+#register2.get-package-top-short{
+    animation-name              : hide-package;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0.5s;
+}
+
+/* Register 3 */
+
+#ursula.get-package-down-long{
+    animation-name              : ursula-sprite-down-long;
+    animation-duration          : 1s;
+    animation-timing-function   : steps(5);
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0s;
+}
+
+#register3.get-package-top-short{
+    animation-name              : hide-package;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0.5s;
+}
+
+/* Register 4 */
+
+#ursula.get-package-down-short{
+    animation-name              : ursula-sprite-down-short;
+    animation-duration          : 1s;
+    animation-timing-function   : steps(4);
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0s;
+}
+
+#register4.get-package-top-short{
+    animation-name              : hide-package;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 0.5s;
+}
+
+
+
+/* Animation Sprites Ursula */
+@keyframes ursula-sprite-top-short {
+    0%
+    {
+        background-position-x: 0%;
+    }
+    50%
+    {
+        background-position-x: 19.05%;
+    }
+    100%
+    {
+        background-position-x: 0%;
+    }
+}
+
+@keyframes ursula-sprite-top-long {
+    0%
+    {
+        background-position-x: 23.8%;
+    }
+    50%
+    {
+        background-position-x: 47.61%;
+    }
+    100%
+    {
+        background-position-x: 23.8%;
+    }
+}
+
+@keyframes ursula-sprite-down-short {
+    0%
+    {
+        background-position-x: 52.38%;
+    }
+    50%
+    {
+        background-position-x: 71.43%;
+    }
+    100%
+    {
+        background-position-x: 52.38%;
+    }
+}
+
+@keyframes ursula-sprite-down-long {
+    0%
+    {
+        background-position-x: 76.19%;
+    }
+    50%
+    {
+        background-position-x: 100%;
+    }
+    100%
+    {
+        background-position-x: 76.19%;
+    }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Core Inc Dependencies -->
+    <link rel="stylesheet" href="/css/standart.css" />
+    <link rel="stylesheet" href="/css/tooltip.css" />
+    <link rel="stylesheet" href="/css/screen.css" />
+    <link rel="stylesheet" href="/css/animation-logo.css" />
+    <link rel="stylesheet" href="/css/animation-screen.css" />
+    <link rel="stylesheet" href="/css/animation-lucy.css" />
+    <link rel="stylesheet" href="/css/animation-m3m0.css" />
+    <link rel="stylesheet" href="/css/animation-ursula.css" />
+    <link rel="stylesheet" href="/css/animation-bus.css" />
+    <link rel="stylesheet" href="/css/animation-package.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.fittext.js"></script>
+    <script type="text/javascript" src="/js/animation.js"></script>
+    <script type="text/javascript" src="/js/tooltip.js"></script>
+    <script type="text/javascript" src="/js/helper.js"></script>
+    <script type="text/javascript" src="/js/start.js"></script>
+    <script type="text/javascript" src="/js/animation-controller.js"></script>
+    <script type="text/javascript" src="/js/pause.js"></script>
+
+    <!-- CodeMirror - textarea Dependencies -->
+    <link rel="stylesheet" href="/css/codemirror.css" />
+    <script src="/js/codemirror.js"></script>
+    <script src="/js/pascal.js"></script>
+    <script src="/js/placeholder.js"></script>
+
+    <!-- Socket Dependencies -->
+    <script
+      type="text/javascript"
+      src="https://kit.fontawesome.com/d85a36b1b9.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/sendScript.js"></script>
+    <script type="text/javascript" src="/js/navbar.js"></script>
+    <script type="text/javascript" src="/js/tutorial.js"></script>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/tutorial.css" />
+
+    <title>Core Inc. - Algoritmos Animados</title>
+  </head>
+
+  <body>
+    <!-- Tutorial -->
+    <section id="tutorial">
+      <div id="tutorial-bg"></div>
+      <div id="tutorial-option">
+        <div class="header-popup">
+          <h1>Bem vindo ao Core Inc.!!</h1>
+        </div>
+        <div class="content-popup">
+          <p>Já que esta é sua primeira vez aqui, recomendamos que faça nosso tutorial.</p>
+          <p>Deseja fazer o tutorial?</p>
+          <div class="content-button">
+            <button id="yes">
+              <i class="fas fa-check"></i>
+              Sim
+            </button>
+            <button id="no">
+              <i class="fas fa-times"></i>
+              Não
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="balao" id="step-0">O Core Inc. irá animar o código que você desejar, desde que você digite ele neste campo abaixo.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-1">Para escolher quais linhas animar, é só adicionar pontos de parada (breakpoints).
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-2">Caso você não adicione nenhum breakpoint, o código completo será animado.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-3">Se o seu código possui entradas de dados, adicione elas em ordem, uma por linha.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-4">Enfim, é só pressionar o botão executar e assistir!
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-5">Também é possível pausar a animação passando o mouse sob tela.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-6">Informações sobre os elementos na tela são exibidas aqui de acordo com onde seu mouse está.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-7">Aqui você também pode escolher a linguagem que quer compilar. Por enquanto só temos Pascal.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-8">Se você quiser mais informações sobre o projeto e o que ele suporta, acesse as demais páginas.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-9">Uma última coisa só! Recomendo que você assista o vídeo introdutório das animações, é importante pra sua imersão ;D 
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Finalizar</button>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/0ekg7FmJ2KY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navbar -->
+    <nav>
+      <button id="navbar-button">🞬</button>
+      <ul>
+        <li>
+          <a href="/documentation"> Documentação </a>
+        </li>
+        <li>
+          <a href="/how-to-use"> Como Usar </a>
+        </li>
+        <li>
+          <a class="active" href="/"> Início </a>
+        </li>
+        <li>
+          <a href="/for-devs"> Para Desenvolvedores </a>
+        </li>
+        <li>
+          <a href="/about"> Sobre </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner">
+      <div id="phrase">
+        Crie códigos, histórias, animações e entenda como seus algoritmos
+        funcionam.
+      </div>
+      <video autoplay muted loop playsinline>
+        <source src="/images/logo.webm" type="video/webm" />
+      </video>
+      <a href="https://youtu.be/0ekg7FmJ2KY" target="_blank"
+        ><div id="video-button"></div
+      ></a>
+    </section>
+
+    <!-- Main Compiler + Core Inc -->
+    <div id="main-content">
+      <div id="form-area">
+        <div id="control-panel">
+          <button id="run">
+            <i class="fas fa-play"></i>
+            Executar
+          </button>
+          <span id="output-area"
+            >Status: <span id="output-message"></span
+          ></span>
+          <select name="language" id="language">
+            <option value="pascal">Pascal</option>
+          </select>
+          <button id="help" class="yes-forward" title="Tutorial"><i class="fas fa-question-circle"></i></button>
+        </div>
+        <div id="script-area"></div>
+        <div id="input-title">
+          <label for="input"><i class="fas fa-keyboard"></i> Input:</label
+          ><span class="opaque"> (Opcional) </span>
+        </div>
+        <div id="input-area"></div>
+      </div>
+      <!-- Core Inc  -->
+      <div id="content-core"></div>
+    </div>
+  </body>
+</html>

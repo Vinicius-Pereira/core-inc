@@ -1,0 +1,215 @@
+/* Css rules for Socket Index */
+
+body {
+    background-color: #1d1e22;
+    margin: 0;
+}
+
+#banner {
+    height: 140px;
+    background-color: #131314;
+    color: #ffffff;
+    font-family: Mecha;
+    font-weight: bold;
+    margin-bottom: 2vw;
+}
+
+#banner #phrase {
+    float: left;
+    padding-top: 2.5vw;
+    padding-left: 2.4vw;
+    width: 24%;
+    font-size: 26px;
+}
+
+#banner video {
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#video-button {
+    background-image: url(../images/video-button.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: relative;
+    float: right;
+    height: 100%;
+    width: 200px;
+    margin-right: 2vw;
+    cursor: pointer;
+}
+
+#main-content {
+    align-content: center;
+}
+
+#form-area {
+    float: left;
+    padding: 1vw;
+    padding-right: 0;
+    padding-top: 0;
+    width: 40%;
+}
+
+#control-panel {
+    margin-bottom: 0.8vw;
+}
+
+#run {
+    background-color: #6dc5fa;
+    border: none;
+    outline: none;
+    padding: 0.3vw 1vw;
+    margin-right: 0.2vw;
+    font-family: Mecha;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1vw;
+    cursor: pointer;
+}
+
+#run:hover {
+    background-color: #65b6e7;
+}
+
+#run:active {
+    transform: translateY(2px);
+}
+
+#help {
+    background-color: #ffdb60;
+    border: none;
+    outline: none;
+    padding: 0.4vw 1vw;
+    margin-right: 0.2vw;
+    float: right;
+    font-family: Mecha;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1vw;
+    cursor: pointer;
+}
+
+#help:hover {
+    background-color: #dfbf55;
+}
+
+#help:active {
+    transform: translateY(2px);
+}
+
+#output-area {
+    font-family: Mecha;
+    font-weight: bold;
+    font-size: 1.1vw;
+    color: #ffffff;
+    vertical-align: bottom;
+    letter-spacing: 1px;
+}
+
+#output-message.error {
+    color: #f03745;
+}
+
+#output-message.success {
+    color: #93f25e;
+}
+
+#output-message.info {
+    color: #6dc5fa;
+}
+
+#language {
+    border-style: solid;
+    border-radius: 0;
+    border-color: #ffffff;
+
+    font-family: Mecha;
+    font-size: 1vw;
+    color: #ffffff;
+
+    padding: 0.3vw;
+    outline: none;
+    background-color: #1e1e1e;
+    float: right;
+    height: 100%;
+}
+
+#ident{
+    float: right;
+    padding-top: 0.3vw;
+    padding-left: 1vw;
+    font-size: 1.3vw;
+    color: #ffffff;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+
+#script {
+    width: 100%;
+}
+
+#input-title{
+    font-family: Mecha;
+    font-weight: bold;
+    font-size: 1.1vw;
+    color: #ffffff;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+#input-title i{
+    font-size: 1.3vw;
+}
+
+#input-title .opaque{
+    font-size: 0.9vw;
+}
+
+#input {
+    width: 100%;
+}
+
+#content-core {
+    margin-left: 42%;
+}
+
+.opaque{
+    opacity: 0.4;
+}
+
+textarea::placeholder {
+    color: #0bf;  
+}
+
+@media only screen and (max-width: 870px) {
+    #banner {
+        height: auto;
+    }
+    
+    #banner #phrase {
+        display: block;
+        float: none;
+        text-align: center;
+        padding-left: 20vw;
+        width: 50%;
+        font-size: 20px;
+    }
+    
+    #banner video {
+        height: 33%;
+        width: 25%;
+        margin-left: 35vw;
+    }
+    
+    #video-button {
+        display: block;
+        float: none;
+        height: 20vw;
+        width: 22%;
+        margin-right: 0vw;
+        margin-left: 35vw;
+    }
+}

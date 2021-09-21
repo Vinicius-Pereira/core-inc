@@ -1,0 +1,407 @@
+/* File with every step of animation in keyframes */
+.pause{
+    animation-play-state: paused;
+}
+
+/* Animation Get Instruction - sync with animation-screen.css */
+#lucy.get-instruction {
+    animation-name              : lucy-sprite-back;
+    animation-duration          : 0s;
+    animation-timing-function   : steps(4);
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 0.2;
+    animation-delay             : 0s;
+}
+
+/* Animation Ask Package - sync with animation-screen.css */
+#lucy.ask-package {
+    animation-name              : lucy-route1-l,    lucy-sprite-front,  lucy-route2B-l, lucy-sprite-right,  lucy-route4-l,  lucy-sprite-front;
+    animation-duration          : 1s,               0.5s,               1s,             0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                2,                  1,              2,                  1,              0.9;
+    animation-delay             : 0.5s,             0.5s,               1.5s,           1.5s,               2.5s,           2.5s;
+}
+
+/* Animation Ask Package Short- sync with animation-screen.css */
+#lucy.ask-package-short {
+    animation-name              : lucy-route2A-l,   lucy-sprite-front,  lucy-route2B-l, lucy-sprite-right,  lucy-route4-l,  lucy-sprite-front;
+    animation-duration          : 1s,               0.5s,               1s,             0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                2,                  1,              2,                  1,              0.9;
+    animation-delay             : 0.5s,             0.5s,               1.5s,           1.5s,               2.5s,           2.5s;
+}
+
+/* Animation Get Package - sync with animation-package.css and animation-m3m0.css */
+
+#lucy.move-get-package{
+    animation-name              : lucy-route4-l,    lucy-route2B-l,   lucy-sprite-back, lucy-route2C-l, lucy-sprite-right,  lucy-route6-l,  lucy-sprite-front;
+    animation-duration          : 0s,               0.5s,             0.5s,             0.5s,           0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           linear,           steps(4),         linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,         forwards,         forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,                1,                1,              1,                  1,              0.9;
+    animation-delay             : 0s,               3.5s,             3.5s,             4s,             4s,                 4.5s,           4.5s;
+}
+
+#lucy-package.move-get-package {
+    animation-name              : show-package;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 5s;
+}
+
+/* Animation Put Package Register */
+
+#lucy.put-package-register{
+    animation-name              : lucy-route6-l,    lucy-route2C-l, lucy-sprite-back,   lucy-route2A-l, lucy-sprite-left,   lucy-route3-l,  lucy-sprite-back;
+    animation-duration          : 0s,               0.5s,           0.5s,               0.5s,           0.5s,               1s,             0.5s;
+    animation-timing-function   : linear,           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1,                  1,              1,                  1,              2;
+    animation-delay             : 0s,               0s,             0s,                 0.5s,           0.5s,               1s,             1s;
+}
+
+#lucy-package.put-package-register {
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0.1s,           2s;
+}
+
+/* Animation Check If - sync with animation-screen.css */
+
+#lucy.check-if{
+    animation-name              : lucy-route9-l;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 1s;
+}
+
+/* Animation Get Declare - sync with animation-package.css*/
+
+#lucy.get-declare{
+    animation-name              : lucy-route9-l,    lucy-route0-l,  lucy-sprite-left,   lucy-route9-l,  lucy-sprite-right,  lucy-route1-l,  lucy-sprite-front,  lucy-route2Z-l,  lucy-sprite-right,  lucy-route6A-l, lucy-sprite-front;
+    animation-duration          : 0s,               0.5s,           0.5s,               0.5s,           0.5s,               1.5s,           0.5s,               0.5s,           0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1,                  1,              1,                  1,              3,                  1,              1,                  1,              0.9;
+    animation-delay             : 0s,               0s,             0s,                 0.5s,           0.5s,               1s,             1s,                 2.5s,           2.5s,               3s,             3s;
+}
+
+#lucy-package.get-declare {
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0.5s,         3.5s;
+}
+
+/* Animation Set Package - sync with animation-package.css and animation-m3m0.css*/
+
+#lucy.move-set-package{
+    animation-name              : lucy-route6A-l,   lucy-route2A-l, lucy-sprite-back,   lucy-route1-l,  lucy-sprite-left,   lucy-route9-l,  lucy-sprite-back;
+    animation-duration          : 0s,               0.5s,           0.5s,               0.5s,           0.5s,               1.5s,           0.5s;
+    animation-timing-function   : linear,           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1,                  1,              1,                  1,              3;
+    animation-delay             : 0s,               0s,             0s,                 0.5s,           0.5s,               1s,             1s;
+}
+
+/* Animation Register To Memory*/
+
+#lucy.register-to-memory{
+    animation-name              : lucy-route3-l,    lucy-route2A-l,     lucy-sprite-front,  lucy-route2Z-l, lucy-sprite-left,   lucy-route6A-l, lucy-sprite-front;
+    animation-duration          : 0s,               1s,                 0.5s,               0.5s,           0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           linear,             steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,           forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,                  2,                  1,              1,                  1,              0.9;
+    animation-delay             : 0s,               1s,                 1s,                 2s,             2s,                 2.5s,           2.5s;
+}
+
+#lucy-package.register-to-memory {
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0s,           3s;
+}
+
+/* Animation Register To Output - sync with animation-blue.css and animation-package.css*/
+
+#lucy.register-to-output{
+    animation-name              : lucy-route3-l,    lucy-route2A-l,     lucy-sprite-front,  lucy-route2D-l, lucy-sprite-right,  lucy-route7-l,  lucy-sprite-back,   lucy-route8-l,  lucy-sprite-right,  lucy-route8A-l, lucy-sprite-back,   lucy-route8B-l, lucy-sprite-left;
+    animation-duration          : 0s,               1s,                 0.5s,               1s,             0.5s,               1.5s,           0.5s,               0.5s,           0.5s,               0.5s,           0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           linear,             steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,           forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,                  2,                  1,              2,                  1,              3,                  1,              1,                  1,              1,                  1,              0.9;
+    animation-delay             : 0s,               1s,                 1s,                 2s,             2s,                 3s,             3s,                 4.5s,           4.5s,               5s,             5s,                 5.5s,           5.5s;
+}
+
+#lucy-package.register-to-output {
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0s,           6s;
+}
+
+/* Animation Memory To Output - sync with animation-blue.css and animation-package.css */
+
+#lucy.memory-to-output{
+    animation-name              : lucy-route6-l,    lucy-route2C-l, lucy-sprite-back,   lucy-route2D-l, lucy-sprite-right,  lucy-route7-l,  lucy-sprite-back,   lucy-route8-l,  lucy-sprite-right,  lucy-route8A-l, lucy-sprite-back,   lucy-route8B-l, lucy-sprite-left;
+    animation-duration          : 0s,               0.5s,           0.5s,               0.5s,           0.5s,               1.5s,           0.5s,               0.5s,           0.5s,               0.5s,           0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1,                  1,              1,                  1,              3,                  1,              1,                  1,              1,                  1,              0.9;
+    animation-delay             : 0s,               0s,             0s,                 0.5s,           0.5s,               1s,             1s,                 2.5s,           2.5s,               3s,             3s,                 3.5s,           3.5s;
+}
+
+#lucy-package.memory-to-output {
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0s,           4s;
+}
+
+/* Animation Output - sync with animation-blue.css and animation-package.css */
+
+#lucy.output{
+    animation-name              : lucy-route8B-l,   lucy-route8A-l, lucy-sprite-right,  lucy-route8-l,  lucy-sprite-front,  lucy-route9-l,  lucy-sprite-left;
+    animation-duration          : 0s,               0.5s,           0.5s,               0.5s,           0.5s,               2s,             0.5s;
+    animation-timing-function   : linear,           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1,                  1,              1,                  1,              4;
+    animation-delay             : 0s,               1s,             1s,                 1.5s,           1.5s,               2s,             2s;
+}
+
+/* Animation Input To Memory - sync with animation-blue.css and animation-package.css */
+
+#lucy.input-to-memory{
+    animation-name              : lucy-route8B-l,   lucy-route8A-l, lucy-sprite-right,  lucy-route8-l,  lucy-sprite-front,  lucy-route7-l,  lucy-sprite-left,   lucy-route2D-l, lucy-sprite-front,  lucy-route2Z-l, lucy-sprite-left,   lucy-route6A-l, lucy-sprite-front;
+    animation-duration          : 0s,               0.5s,           0.5s,               0.5s,           0.5s,               1s,             0.5s,               1.5s,           0.5s,               1s,             0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1,                  1,              1,                  1,              2,                  1,              3,                  1,              2,                  1,              0.9;
+    animation-delay             : 0s,               1s,             1s,                 1.5s,           1.5s,               2s,             2s,                 3s,             3s,                 4.5s,           4.5s,               5.5s,           5.5s;
+}
+
+#lucy-package.input-to-memory {
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 1s,           6s;
+}
+
+/* Animation Movement Keyframes Lucy */
+
+@keyframes lucy-route0-l{
+    from{}
+    to
+    {
+        left: 19.3%;
+        top: 13%;
+    }
+}
+
+@keyframes lucy-route1-l{
+    from{}
+    to
+    {
+        left: 26.7%;
+        top: 47.8%;
+    }
+}
+
+@keyframes lucy-route2Z-l{
+    from{}
+    to
+    {
+        left: 39%;
+        top: 48%;
+    }
+}
+
+@keyframes lucy-route2A-l{
+    from{}
+    to
+    {
+        left: 44.6%;
+        top: 48%;
+    }
+}
+
+@keyframes lucy-route2B-l{
+    from{}
+    to
+    {
+        left: 46.8%;
+        top: 47.8%;
+    }
+}
+
+@keyframes lucy-route2C-l{
+    from{}
+    to
+    {
+        left: 54.1%;
+        top: 47.8%;
+    }
+}
+
+@keyframes lucy-route2D-l{
+    from{}
+    to
+    {
+        left: 65.6%;
+        top: 48%;
+    }
+}
+
+@keyframes lucy-route3-l{
+    from{}
+    to
+    {
+        left: 44.6%;
+        top: 26.5%;
+    }
+}
+
+@keyframes lucy-route4-l{
+    from{}
+    to
+    {
+        left: 46.8%;
+        top: 50.4%;
+    }
+}
+
+@keyframes lucy-route6-l{
+    from{}
+    to
+    {
+        left: 54.1%;
+        top: 54.1%;
+    }
+}
+
+@keyframes lucy-route6A-l{
+    from{}
+    to
+    {
+        left: 39%;
+        top: 54.1%;
+    }
+}
+
+@keyframes lucy-route7-l{
+    from{}
+    to
+    {
+        left: 65.6%;
+        top: 13%;
+    }
+}
+
+@keyframes lucy-route8-l{
+    from{}
+    to
+    {
+        left: 85.5%;
+        top: 13%;
+    }
+}
+
+@keyframes lucy-route8A-l{
+    from{}
+    to
+    {
+        left: 85.5%;
+        top: 7.7%;
+    }
+}
+
+@keyframes lucy-route8B-l{
+    from{}
+    to
+    {
+        left: 80.2%;
+        top: 7.7%;
+    }
+}
+
+@keyframes lucy-route9-l{
+    from{}
+    to
+    {
+        left: 27%;
+        top: 13%;
+    }
+}
+
+/* Animation Sprites Lucy */
+@keyframes lucy-sprite-front {
+    from
+    {
+        transform: scaleX(1);
+        background-position-x: 0%;
+    }
+    to
+    {
+        transform: scaleX(1);
+        background-position-x: 35.5%;
+    }
+}
+
+@keyframes lucy-sprite-back {
+    from
+    {
+        transform: scaleX(1);
+        background-position-x: 71.5%;
+    }
+    to
+    {
+        transform: scaleX(1);
+        background-position-x: 109%;
+    }
+}
+
+@keyframes lucy-sprite-right {
+    from
+    {
+        transform: scaleX(-1);
+        background-position-x: 35.9%;
+    }
+    to
+    {
+        transform: scaleX(-1);
+        background-position-x: 71%;
+    }
+}
+
+@keyframes lucy-sprite-left {
+    from
+    {
+        transform: scaleX(1);
+        background-position-x: 35.9%;
+    }
+    to
+    {
+        transform: scaleX(1);
+        background-position-x: 71%;
+    }
+}
+

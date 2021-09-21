@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@font-face {
+    font-family: Mecha;
+    src: url(../fonts/Mecha.ttf);
+}
+
+@font-face {
+    font-family: Mecha;
+    src: url(../fonts/Mecha_Bold.ttf);
+    font-weight: bold;
+}
+
+/* Standart configuration to Core Inc. background */
+
+#core {
+    background-image: url(../images/bg.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    display: flex !important;
+    float: left;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* Size options 
+*/
+
+#core.small {
+    width: 230px;
+    height: 230px;
+}
+
+#core.medium {
+    width: 460px;
+    height: 460px;
+}
+
+#core.large {
+    width: 690px;
+    height: 690px;
+}
+
+/* Standart configuration */
+
+#loading {
+    background-color: #000000;
+    position: absolute;
+    z-index: 3;
+    width: inherit;
+    height: inherit;
+}
+
+#logo {
+    background-size: cover;
+    position: absolute;
+
+    top: 25%;
+    left: 25%;
+}
+
+#program {
+    position: absolute;
+    text-align: center;
+    width: 55%;
+    top: 70%;
+    margin-left: 25%;
+    margin-right: 20%;
+    margin-bottom: 15%;
+    font-family: 'Space Mono', monospace;
+    color: #ffffff;
+}
+
+#pc-hud{
+    top: 1%;
+    padding-top: 2.5%;
+    padding-left: 9%;
+
+    width: 20%;
+}
+
+#ir-hud{
+    top: 1%;
+    padding-top: 2.5%;
+    padding-left: 11%;
+
+    width: 19%;
+}
+
+.hud{
+    font-family: Mecha;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Screen Size anD Position */
+
+#screen {
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    width: inherit;
+    height: inherit;
+}
+
+/* Characters */
+
+#lucy {
+    background-size: cover;
+    top: 13%;
+    left: 27%;
+    position: absolute;
+    z-index: 1;
+}
+
+#m3m0 {
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+    top: 66.7%;
+    left: 46.4%;
+}
+
+#ursula {
+    background-size: cover;
+    top: 25.1%;
+    left: 41%;
+    position: absolute;
+    z-index: 1;
+}
+
+#bus {
+    background-size: cover;
+    top: 7%;
+    left: 66%;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Packages */
+
+#door-inout {
+    background-size: cover;
+    top: 0%;
+    left: 62.6%;
+    position: absolute;
+    z-index: 0;
+}
+
+#package {
+    background-image: url(../images/package-sheet.png);
+    background-size: cover;
+    position: absolute;
+    z-index: 0;
+    top: 85.6%;
+    left: 101.3%;
+}
+
+.package {
+    background-size: cover;
+    position: absolute;
+    opacity: 0;
+}
+
+#content-package {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+}
+
+#trail-get-package {
+    top: 65.2%;
+    left: 66.7%;
+}
+
+#trail-set-package {
+    top: 55%;
+    left: 40%;
+}
+
+#package-declare {
+    background-image: url(../images/package-trail-sheet.png);
+    top: 2%;
+    left: -10%;
+}
+
+#package-inout {
+    background-image: url(../images/package-trail-sheet.png);
+    top: 6%;
+    left: 77%;
+}
+
+.package-show {
+    opacity: 1;
+}
+
+#register1 {
+    top: 19.5%;
+    left: 39.5%;
+}
+
+#register2 {
+    top: 19.5%;
+    left: 51.6%;
+}
+
+#register3 {
+    top: 27.6%;
+    left: 39.5%;
+}
+
+#register4 {
+    top: 27.6%;
+    left: 51.6%;
+}
+
+/* Size options */
+
+/* Logo */
+
+#logo.small {
+    background-image: url(../images/opening-sheet-small.png);
+
+    width: 120px;
+    height: 100px;
+}
+
+#logo.medium {
+    background-image: url(../images/opening-sheet-medium.png);
+
+    width: 240px;
+    height: 200px;
+}
+
+#logo.large {
+    background-image: url(../images/opening-sheet-large.png);
+
+    width: 360px;
+    height: 300px;
+}
+
+/* Screen */
+
+#screen.small{
+    background-image: url(../images/screen-sheet-small.png);
+}
+
+#screen.medium{
+    background-image: url(../images/screen-sheet-medium.png);
+}
+
+#screen.large{
+    background-image: url(../images/screen-sheet-large.png);
+}
+
+/* Lucy */
+
+#lucy.small {
+    background-image: url(../images/lucy-sheet-small.png);
+    width: 16px;
+    height: 16px;
+}
+
+#lucy.medium {
+    background-image: url(../images/lucy-sheet-medium.png);
+    width: 32px;
+    height: 32px;
+}
+
+#lucy.large {
+    background-image: url(../images/lucy-sheet-large.png);
+    width: 48px;
+    height: 48px;
+}
+
+/* M3M0 */
+
+#m3m0.small {
+    background-image: url(../images/m3m0-sheet-small.png);
+    width: 16px;
+    height: 16px;
+}
+
+#m3m0.medium {
+    background-image: url(../images/m3m0-sheet-medium.png);
+    width: 32px;
+    height: 32px;
+}
+
+#m3m0.large {
+    background-image: url(../images/m3m0-sheet-large.png);
+    width: 48px;
+    height: 48px;
+}
+
+/* Ursula */
+
+#ursula.small {
+    background-image: url(../images/ursula-sheet-small.png);
+    width: 103px;
+    height: 36px;
+}
+
+#ursula.medium {
+    background-image: url(../images/ursula-sheet-medium.png);
+    width: 206px;
+    height: 72px;
+}
+
+#ursula.large {
+    background-image: url(../images/ursula-sheet-large.png);
+    width: 309px;
+    height: 108px;
+}
+
+/* Bus */
+
+#bus.small {
+    background-image: url(../images/bus-sheet-small.png);
+    width: 17px;
+    height: 16px;
+}
+
+#bus.medium {
+    background-image: url(../images/bus-sheet-medium.png);
+    width: 34px;
+    height: 32px;
+}
+
+#bus.large {
+    background-image: url(../images/bus-sheet-large.png);
+    width: 51px;
+    height: 48px;
+}
+
+/* Package */
+
+#door-inout.small {
+    background-image: url(../images/door-sheet-small.png);
+    width: 32px;
+    height: 14px;
+}
+
+#door-inout.medium {
+    background-image: url(../images/door-sheet-medium.png);
+    width: 64px;
+    height: 28px;
+}
+
+#door-inout.large {
+    background-image: url(../images/door-sheet-large.png);
+    width: 96px;
+    height: 42px;
+}
+
+#package.small {
+    background-image: url(../images/package-sheet-small.png);
+    width: 12px;
+    height: 20px;
+}
+
+#package.medium {
+    background-image: url(../images/package-sheet-medium.png);
+    width: 24px;
+    height: 40px;
+}
+
+#package.large {
+    background-image: url(../images/package-sheet-large.png);
+    width: 36px;
+    height: 60px;
+}
+
+.package.small {
+    background-image: url(../images/package-sheet-small.png);
+    width: 12px;
+    height: 20px;
+}
+
+.package.medium {
+    background-image: url(../images/package-sheet-medium.png);
+    width: 24px;
+    height: 40px;
+}
+
+.package.large {
+    background-image: url(../images/package-sheet-large.png);
+    width: 36px;
+    height: 60px;
+}
+
+/* Trail Get Package */
+
+#trail-get-package.small {
+    background-image: url(../images/package-trail-sheet-small.png);
+}
+
+#trail-get-package.medium {
+    background-image: url(../images/package-trail-sheet-medium.png);
+}
+
+#trail-get-package.large {
+    background-image: url(../images/package-trail-sheet-large.png);
+}
+
+/* Trail Set Package */
+
+#trail-set-package.small {
+    background-image: url(../images/package-trail-sheet-small.png);
+}
+
+#trail-set-package.medium {
+    background-image: url(../images/package-trail-sheet-medium.png);
+}
+
+#trail-set-package.large {
+    background-image: url(../images/package-trail-sheet-large.png);
+}
+
+.register.small {
+    background-image: url(../images/package-trail-sheet-small.png);
+}
+
+.register.medium {
+    background-image: url(../images/package-trail-sheet-medium.png);
+}
+
+.register.large {
+    background-image: url(../images/package-trail-sheet-large.png);
+}

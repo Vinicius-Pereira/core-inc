@@ -1,0 +1,68 @@
+/* Navbar Css styles */
+
+nav {
+    
+    position: relative;
+    width: 100vw;
+    height: auto;
+    background-color: #131314;
+    text-align: center;
+    box-shadow: 0 0.2vw 5px #000000;
+}
+
+nav li {
+    list-style-type: none;
+    margin: 0 2vw;
+    font-size: 2vh;
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding-right: 0.5vw;
+    padding-left: 0.5vw;
+    padding-top: 0.8vw;
+    padding-bottom: 0.8vw;
+    font-family: Mecha;
+    font-weight: bold;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    position: relative;
+}
+
+nav a:hover {
+    background-color: #090909;
+}
+
+nav a.active {
+    color: #6dc5fa;
+}
+
+nav button {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+    nav ul {
+        flex-direction: column;
+        display: flex;
+    }
+    nav li {
+        margin: 0;
+    }
+    nav button {
+        display: block;
+        padding: 2vw;
+        font-size: 3vh;
+        background-color: #1d1e22;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        align-self: flex-start;
+    }
+}

@@ -1,0 +1,139 @@
+/* Animation to Get Package - sync with animation-package.css */
+#m3m0.move-get-package {
+    animation-name              : m3m0-route2-l,    m3m0-sprite-front,  m3m0-route3-l,  m3m0-sprite-front,  m3m0-route2-l,  m3m0-sprite-back,   m3m0-route6-l,  m3m0-sprite-right,  m3m0-route2-l,  m3m0-sprite-left,   m3m0-route1-l,  m3m0-sprite-back;
+    animation-duration          : 0.5s,             0.5s,               1s,             0.5s,               0.5s,           0.5s,               1s,             0.5s,               1s,             0.5s,               0.5s,           0.5s;
+    animation-timing-function   : linear,           steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,                  1,              0.9,                1,              0.9,                1,              2,                  1,              2,                  1,              1;
+    animation-delay             : 0s,               0s,                 0.5s,           0.5s,               2s,             2s,                 2.5s,           2.5s,               3.5s,           3.5s,               4.5s,           4.5s;
+}
+
+#m3m0-package.move-get-package {
+    animation-name              : show-package,         hide-package;
+    animation-duration          : 0s,                   0s;
+    animation-timing-function   : linear,               linear;
+    animation-fill-mode         : forwards,             forwards;
+    animation-iteration-count   : 1,                    1;
+    animation-delay             : 2s,                   3.5s;
+}
+
+
+/* Animation to Set Package - sync with animation-package.css and animation-lucy.css*/
+
+#m3m0.move-set-package {
+    animation-name              : m3m0-route2-l,    m3m0-sprite-front,  m3m0-route5-l,  m3m0-sprite-left,   m3m0-route2-l,  m3m0-sprite-right,  m3m0-route3-l,  m3m0-sprite-front,  m3m0-route1-l,  m3m0-sprite-back;
+    animation-duration          : 0.5s,             0.5s,               1s,             0.5s,               1s,             0.5s,               0.5s,           0.5s,               1s,             0.5s;
+    animation-timing-function   : linear,           steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4),           linear,         steps(4);
+    animation-fill-mode         : forwards,         forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards,           forwards,       forwards;
+    animation-iteration-count   : 1,                1,                  1,              2,                  1,              1.9,                1,              0.9,                1,              2;
+    animation-delay             : 0s,               0s,                 0.5s,           0.5s,               1.5s,           1.5s,               2.5s,           2.5s,               3s,             3s;
+}
+
+#m3m0-package.move-set-package {
+    animation-name              : show-package,         hide-package;
+    animation-duration          : 0s,                   0s;
+    animation-timing-function   : linear,               linear;
+    animation-fill-mode         : forwards,             forwards;
+    animation-iteration-count   : 1,                    1;
+    animation-delay             : 1.5s,                 3s;
+}
+
+/* Animation Movement Keyframes M3M0 */
+
+@keyframes m3m0-route1-l{
+    from{}
+    to
+    {
+        top:66.7%;
+        left:46.4%;
+    }
+}
+
+@keyframes m3m0-route2-l{
+    from{}
+    to
+    {
+        top:74%;
+        left:46.4%;
+    }
+}
+
+@keyframes m3m0-route3-l{
+    from{}
+    to
+    {
+        top:77.8%;
+        left:46.4%;
+    }
+}
+
+@keyframes m3m0-route5-l{
+    from{}
+    to
+    {
+        top:74%;
+        left:27.5%;
+    }
+}
+
+@keyframes m3m0-route6-l{
+    from{}
+    to
+    {
+        top:74%;
+        left:66.7%;
+    }
+}
+
+/* Animation Sprites M3M0 */
+@keyframes m3m0-sprite-front {
+    from
+    {
+        transform: scaleX(1);
+        background-position-x: 0%;
+    }
+    to
+    {
+        transform: scaleX(1);
+        background-position-x: 35.5%;
+    }
+}
+
+@keyframes m3m0-sprite-back {
+    from
+    {
+        transform: scaleX(1);
+        background-position-x: 71.5%;
+    }
+    to
+    {
+        transform: scaleX(1);
+        background-position-x: 109%;
+    }
+}
+
+@keyframes m3m0-sprite-right {
+    from
+    {
+        transform: scaleX(-1);
+        background-position-x: 35.9%;
+    }
+    to
+    {
+        transform: scaleX(-1);
+        background-position-x: 71%;
+    }
+}
+
+@keyframes m3m0-sprite-left {
+    from
+    {
+        transform: scaleX(1);
+        background-position-x: 35.9%;
+    }
+    to
+    {
+        transform: scaleX(1);
+        background-position-x: 71%;
+    }
+}

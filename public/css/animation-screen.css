@@ -1,0 +1,237 @@
+/* Get Instruction - sync wih animation-lucy.css */
+#screen.get-instruction{
+    animation-name:             show-screen;
+    animation-duration:         1.5s;
+    animation-timing-function:  steps(38);
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            0.5s;
+}
+
+#portrait.get-instruction{
+    animation-name:             portrait-lucy;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            2s;
+}
+
+#panel-instructions.get-instruction{
+    animation-name:             show-panel-instructions;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            2.5s;
+}
+
+/* Ask Package - sync with animation-lucy.css */
+
+#screen.ask-package{
+    animation-name:             hide-screen,    show-screen;
+    animation-duration:         1s,             1.5s;
+    animation-timing-function:  steps(38),      steps(38);
+    animation-fill-mode:        forwards,       forwards;
+    animation-iteration-count:  1,              1;
+    animation-delay:            0s,             3.5s;
+}
+
+#portrait.ask-package{
+    animation-name:             hide-lucy,  portrait-lucy;
+    animation-duration:         1s,         1s;
+    animation-timing-function:  linear,     linear;
+    animation-fill-mode:        forwards,   forwards;
+    animation-iteration-count:  1,          1;
+    animation-delay:            0s,         5s;
+}
+
+#panel-instructions.ask-package{
+    animation-name:             hide-panel-instructions,    show-panel-instructions;
+    animation-duration:         0s,                         1s;
+    animation-timing-function:  linear,                     linear;
+    animation-fill-mode:        forwards,                   forwards;
+    animation-iteration-count:  1,                          1;
+    animation-delay:            0.2s,                         5.5s;
+}
+
+/* Animation Check If  - sync with animation-lucy.css*/
+
+#screen.check-if{
+    animation-name:             show-screen;
+    animation-duration:         1.5s;
+    animation-timing-function:  steps(38);
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            0.5s;
+}
+
+#portrait.check-if{
+    animation-name:             portrait-ursula;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            2s;
+}
+
+#panel-instructions.check-if{
+    animation-name:             show-panel-instructions;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            2.5s;
+}
+
+/* Animation Calculate  - sync with animation-lucy.css*/
+
+#screen.calculate{
+    animation-name:             show-screen;
+    animation-duration:         1.5s;
+    animation-timing-function:  steps(38);
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            0.5s;
+}
+
+#portrait.calculate{
+    animation-name:             portrait-ursula;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            2s;
+}
+
+#panel-instructions.calculate{
+    animation-name:             show-panel-instructions;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  1;
+    animation-delay:            2.5s;
+}
+
+
+/* PC and IR fonts always animated */
+#pc-data{
+    animation-name:             colorRotatePC;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  infinite;
+    animation-delay:            0s;
+}
+
+#ir-data{
+    animation-name:             colorRotateIR;
+    animation-duration:         1s;
+    animation-timing-function:  linear;
+    animation-fill-mode:        forwards;
+    animation-iteration-count:  infinite;
+    animation-delay:            0s;
+}
+
+/* Show and Hide Screen with it's Panels */
+@keyframes show-screen{
+    from{
+        z-index: 3;
+        opacity: 1;
+        background-position-x: 0%;
+    }
+    to{
+        z-index: 3;
+        opacity: 1;
+        background-position-x: 100%;
+    }
+}
+
+@keyframes hide-screen{
+    from{
+        z-index: 3;
+        opacity: 1;
+    }
+    to{
+        z-index: -1;
+        opacity: 0;
+    }
+}
+
+@keyframes show-panel-instructions{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes hide-panel-instructions{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+/* Font colors PC and IR */
+@keyframes colorRotatePC {
+    from{
+        color: #3FFD65;
+    }
+    10%{
+        color: #4AE339;
+    }
+    50%{
+        color: #9AFA4B;
+    }
+    75%{
+        color: #C1E339;
+    }
+    100%{
+        color: #FDF53F;
+    }
+}
+
+@keyframes colorRotateIR {
+    from{
+        color: #FD763A;
+    }
+    10%{
+        color: #E35134;
+    }
+    50%{
+        color: #FA4845;
+    }
+    75%{
+        color: #E33482;
+    }
+    100%{
+        color: #FD3AF2;
+    }
+}
+
+/* Portraits Screen */
+@keyframes portrait-lucy{
+    from{
+        background-image: url(../images/portrait-lucy.png);
+        opacity: 0;
+    }
+    to{
+        background-image: url(../images/portrait-lucy.png);
+        opacity: 1;
+    }
+}
+
+@keyframes portrait-ursula{
+    from{
+        background-image: url(../images/portrait-ursula.png);
+        opacity: 0;
+    }
+    to{
+        background-image: url(../images/portrait-ursula.png);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,331 @@
+/* Animation to Get Package - sync with animation-m3m0.css */
+#package.move-get-package {
+    animation-name              : package-delivery, package-empty,  package-return;
+    animation-duration          : 1s,               0s,             1s;
+    animation-timing-function   : linear,           linear,         linear;
+    animation-fill-mode         : forwards,         forwards,       forwards;
+    animation-iteration-count   : 1,                1,              1;
+    animation-delay             : 1s,               2s,             3s;
+}
+
+#trail-get-package.move-get-package{
+    animation-name              : show-package, trail-get-delivery, hide-package;
+    animation-duration          : 0s,           1s,                 0s;
+    animation-timing-function   : linear,       linear,             linear;
+    animation-fill-mode         : forwards,     forwards,           forwards;
+    animation-iteration-count   : 1,            1,                  1;
+    animation-delay             : 3.5s,         3.5s,               5s;
+}
+
+/* Animation to Set Package - sync with animation-m3m0.css */
+
+#trail-set-package.move-set-package{
+    animation-name              : show-package, trail-set-delivery, hide-package;
+    animation-duration          : 0s,           1s,                 0s;
+    animation-timing-function   : linear,       linear,             linear;
+    animation-fill-mode         : forwards,     forwards,           forwards;
+    animation-iteration-count   : 1,            1,                  1;
+    animation-delay             : 0s,           0s,                 1.5s;
+}
+
+#package.move-set-package {
+    animation-name              : package-delivery, package-return;
+    animation-duration          : 1s,               1s;
+    animation-timing-function   : linear,           linear;
+    animation-fill-mode         : forwards,         forwards;
+    animation-iteration-count   : 1,                1;
+    animation-delay             : 1.5s,             3s;
+}
+
+/* Animation Get Declare */
+
+#package-declare.get-declare
+{
+    animation-name              : show-package, trail-declare,  hide-package;
+    animation-duration          : 0s,           0.5s,           0s;
+    animation-timing-function   : linear,       linear,         linear;
+    animation-fill-mode         : forwards,     forwards,       forwards;
+    animation-iteration-count   : 1,            1,              1;
+    animation-delay             : 0s,           0s,             0.5s;
+}
+
+/* Animation Register To Output - sync with animation-lucy.css and animation-blue.css*/
+
+#package-inout.register-to-output
+{
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 6s,           10s;
+}
+
+/* Animation Memory To Output - sync with animation-lucy.css and animation-blue.css*/
+
+#package-inout.memory-to-output
+{
+    animation-name              : show-package;
+    animation-duration          : 0s;
+    animation-timing-function   : linear;
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : 1;
+    animation-delay             : 4s;
+}
+
+/* Animation Input To Memory - sync with animation-lucy.css and animation-blue.css*/
+
+#package-inout.input-to-memory
+{
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0s,           1s;
+}
+
+/* Animation Input - sync with animation-blue.css*/
+
+#package-inout.input
+{
+    animation-name              : show-package, hide-package,   show-package;
+    animation-duration          : 0s,           0s,             0s;
+    animation-timing-function   : linear,       linear,         linear;
+    animation-fill-mode         : forwards,     forwards,       forwards;
+    animation-iteration-count   : 1,            1,              1;
+    animation-delay             : 0s,           1.5s,           4.5s;
+}
+
+#door-inout.input{
+    animation-name              : door-open,    door-close;
+    animation-duration          : 1s,           1s;
+    animation-timing-function   : steps(8),     steps(8);
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 1s,           3s;   
+}
+
+/* Animation Output - sync with animation-blue.css*/
+
+#package-inout.output
+{
+    animation-name              : show-package, hide-package;
+    animation-duration          : 0s,           0s;
+    animation-timing-function   : linear,       linear;
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 0s,           1.5s;
+}
+
+#door-inout.output{
+    animation-name              : door-open,    door-close;
+    animation-duration          : 1s,           1s;
+    animation-timing-function   : steps(8),     steps(8);
+    animation-fill-mode         : forwards,     forwards;
+    animation-iteration-count   : 1,            1;
+    animation-delay             : 1s,           3s;   
+}
+
+/* Animation Sprites Package States */
+
+.bool{
+    background-position-x: 0%;
+}
+
+.bool-hand{
+    background-position-x: 14.3%;
+
+    top: 24%;
+    left: 14%;
+}
+
+.char{
+    background-position-x: 21.2%;
+}
+
+.char-hand{
+    background-position-x: 35.7%;
+
+    top: 24%;
+    left: 14%;
+}
+
+.integer{
+    background-position-x: 42.9%;
+}
+
+.integer-hand{
+    background-position-x: 57.1%;
+
+    top: 0%;
+    left: 14%;
+}
+
+.real{
+    background-position-x: 64.3%;
+}
+
+.real-hand{
+    background-position-x: 78.6%;
+
+    top: 0%;
+    left: 14%;
+}
+
+.string{
+    background-position-x: 85.7%;
+}
+
+.string-hand{
+    background-position-x: 100%;
+
+    top: 0%;
+    left: 14%;
+}
+
+.empty{
+    background-position-x: 28.5%;
+}
+
+/* Animation Sprites Package Trail */
+.package-trail.bool{
+    background-position-x: 0%;
+}
+
+.package-trail.char{
+    background-position-x: 25%;
+}
+
+.package-trail.integer{
+    background-position-x: 50%;
+}
+
+.package-trail.real{
+    background-position-x: 75%;
+}
+
+.package-trail.string{
+    background-position-x: 100%;
+}
+
+/* Animation Movement Packages */
+
+@keyframes package-delivery{
+    from{
+
+    }
+    to{
+        top:85.6%;
+        left:47.07%;
+    }
+    
+}
+
+@keyframes package-return{
+    from{
+
+    }
+    to{
+        top:85.6%;
+        left:-14.5%;
+    }
+    
+}
+
+@keyframes package-empty{
+    from{
+
+    }
+    to{
+        background-position-x: 28.5%;
+    }
+}
+
+@keyframes show-package{
+    from{
+
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes hide-package{
+    from{
+
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes trail-get-delivery{
+    0%{
+        top: 65.2%;
+        left: 66.7%;
+    }
+    50%{
+        top: 65.2%;
+        left: 58%;
+    }
+    70%{
+        top: 63.7%;
+        left: 55%;
+    }
+    100%{
+        top: 55%;
+        left: 54.8%;
+    }
+
+}
+
+@keyframes trail-set-delivery{
+    0%{
+        top: 55%;
+        left: 40%;
+    }
+    50%{
+        top: 63.7%;
+        left: 40%;
+    }
+    70%{
+        top: 65.2%;
+        left: 37.1%;
+    }
+    100%{
+        top: 65.2%;
+        left: 28.1%;
+    }
+
+}
+
+@keyframes trail-declare{
+    from{
+        top: 2%;
+        left: -5%;
+    }
+    to{
+        top: 2%;
+        left: 21%;
+    }
+
+}
+
+@keyframes door-open{
+    from{
+        background-position-x: 0%;
+    }
+    to{
+        background-position-x: 100%;
+    }
+}
+
+@keyframes door-close{
+    from{
+        background-position-x: 100%;
+    }
+    to{
+        background-position-x: 0%;
+    }
+}

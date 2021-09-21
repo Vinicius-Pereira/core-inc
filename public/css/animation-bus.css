@@ -1,0 +1,90 @@
+/* Animation Idle Flying*/
+#bus{
+    animation-name              : bus-sprite;
+    animation-duration          : 0.5s;
+    animation-timing-function   : steps(4);
+    animation-fill-mode         : forwards;
+    animation-iteration-count   : infinite;
+    animation-delay             : 0s;
+}
+
+/* Animation to Input - sync with animation-package.css*/
+
+#bus.input {
+    animation-name              : bus-sprite,   bus-route1-l,   bus-route0-l,  bus-route2-l,    bus-route0-l,   bus-route1-l,   bus-route0-l;
+    animation-duration          : 0.5s          0.5s,           0.5s,          1s,              1s,             0.5s,           0.5s;
+    animation-timing-function   : steps(4),     linear,         linear,        linear,          linear,         linear,         linear;
+    animation-fill-mode         : forwards,     forwards,       forwards,      forwards,        forwards,       forwards,       forwards;
+    animation-iteration-count   : infinite,     1,              1,             1,               1,              1,              1;
+    animation-delay             : 0s,           1s,             1.5s,          2s,              3s,             4s,             4.5s;
+}
+
+#bus-package.input {
+    animation-name              : show-package,         hide-package;
+    animation-duration          : 0s,                   0s;
+    animation-timing-function   : linear,               linear;
+    animation-fill-mode         : forwards,             forwards;
+    animation-iteration-count   : 1,                    1;
+    animation-delay             : 1.5s,                 4.5s;
+}
+
+/* Animation to Output - sync with animation-package.css*/
+#bus.output {
+    animation-name              : bus-sprite,   bus-route1-l,   bus-route0-l,  bus-route2-l,    bus-route0-l;
+    animation-duration          : 0.5s          0.5s,           0.5s,          1s,              1s;
+    animation-timing-function   : steps(4),     linear,         linear,        linear,          linear;
+    animation-fill-mode         : forwards,     forwards,       forwards,      forwards,        forwards;
+    animation-iteration-count   : infinite,     1,              1,             1,               1;
+    animation-delay             : 0s,           1s,             1.5s,          2s,              3s;
+}
+
+#bus-package.output {
+    animation-name              : show-package,         hide-package;
+    animation-duration          : 0s,                   0s;
+    animation-timing-function   : linear,               linear;
+    animation-fill-mode         : forwards,             forwards;
+    animation-iteration-count   : 1,                    1;
+    animation-delay             : 1.5s,                 3s;
+}
+
+/* Animation Movement Keyframes Bus */
+
+@keyframes bus-route0-l{
+    from{}
+    to
+    {
+        top:7%;
+        left:66%;
+    }
+}
+
+@keyframes bus-route1-l{
+    from{}
+    to
+    {
+        top:7%;
+        left:77%;
+    }
+}
+
+@keyframes bus-route2-l{
+    from{}
+    to
+    {
+        top: -10%;
+        left: 66%;
+    }
+}
+
+
+/* Animation Sprites Bus */
+@keyframes bus-sprite {
+    from
+    {
+        background-position-x: 0%;
+    }
+    to
+    {   
+        background-position-x: 100%;
+    }
+}
