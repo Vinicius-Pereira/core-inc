@@ -78,7 +78,7 @@ module.exports = app => {
                 fs.writeFileSync(filepath + filename + ".pas", params.body.script, function (err) {
                     console.log('success to create ' + filename + ".pas");
                 });
-                result = exec(execCompile + filepath + filename + ".pas").toString();
+                result = exec(execCompile + filepath + filename + ".pas" + ' -o"' + filename + '.exe"').toString();
             }
             catch (error) {
                 console.log(error.message);
@@ -101,7 +101,7 @@ module.exports = app => {
                     console.log('success to create ' + filename + "_debug.txt");
                 });
 
-                result = exec(execCompile + filepath + filename + "_debug.pas").toString();
+                result = exec(execCompile + filepath + filename + "_debug.pas" + ' -o"' + filename + '_debug.exe"').toString();
                 var absolutePathExe = path.resolve(filepath + filename + "_debug.exe");
                 var absolutePathTxt = path.resolve(filepath + filename + "_debug.txt");
                 result = exec(absolutePathExe + " > " + absolutePathTxt);
