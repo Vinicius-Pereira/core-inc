@@ -68,6 +68,8 @@ module.exports = app => {
             var parsedCode;
             var breakpoints;
             var input = Array();
+            var flagMissInput = Array();
+            flagMissInput[0] = false;
 
             scriptToRun = "";
             programValues = Array();
@@ -85,40 +87,49 @@ module.exports = app => {
                 
                 fs.unlinkSync(filepath + filename + ".pas");
 
-                return callback([], new Error("Falha ao compilar o código!"));
+                return callback([], new Error("Falha ao compilar!"));
             }
 
             try {
                 input = ParseInput(params.body.input);
-                parsedCode = ParsePascal2Animation(params.body.script, input);
+                parsedCode = ParsePascal2Animation(params.body.script, input, flagMissInput);
                 breakpoints = JSON.parse(params.body.breakpoint);
                 DeleteFiles(filepath + filename);
 
-                fs.writeFileSync(filepath + filename + "_debug.pas", scriptToRun, function (err) {
-                    console.log('success to create ' + filename + "_debug.pas");
-                });
-                fs.writeFileSync(filepath + filename + "_debug.txt", "", function (err) {
-                    console.log('success to create ' + filename + "_debug.txt");
-                });
+                if(flagMissInput[0] == false)
+                {
+                    fs.writeFileSync(filepath + filename + "_debug.pas", scriptToRun, function (err) {
+                        console.log('success to create ' + filename + "_debug.pas");
+                    });
+                    fs.writeFileSync(filepath + filename + "_debug.txt", "", function (err) {
+                        console.log('success to create ' + filename + "_debug.txt");
+                    });
+    
+                    result = exec(execCompile + filepath + filename + "_debug.pas" + ' -o"' + filename + '_debug.exe"').toString();
+                    var absolutePathExe = path.resolve(filepath + filename + "_debug.exe");
+                    var absolutePathTxt = path.resolve(filepath + filename + "_debug.txt");
+                    result = exec(absolutePathExe + " > " + absolutePathTxt);
+                    result = fs.readFileSync(absolutePathTxt, "utf8");
+                    DeleteFiles(filepath + filename + "_debug", true);
+    
+                    programValues = result.split("\n");
+                    programValues = programValues.map(value => value.trim());
+                    parsedCode = SetValues(parsedCode);
+    
+                    var finalArrayAnimation = CleanArrayAnimation(parsedCode, breakpoints);
+                    finalArrayAnimation = JSON.stringify(finalArrayAnimation);
+                }
+                else
+                {
+                    console.log("Input missing!");
+                    return callback([], new Error("Entrada de dados necessária!"));
+                }
 
-                result = exec(execCompile + filepath + filename + "_debug.pas" + ' -o"' + filename + '_debug.exe"').toString();
-                var absolutePathExe = path.resolve(filepath + filename + "_debug.exe");
-                var absolutePathTxt = path.resolve(filepath + filename + "_debug.txt");
-                result = exec(absolutePathExe + " > " + absolutePathTxt);
-                result = fs.readFileSync(absolutePathTxt, "utf8");
-                DeleteFiles(filepath + filename + "_debug", true);
-
-                programValues = result.split("\n");
-                programValues = programValues.map(value => value.trim());
-                parsedCode = SetValues(parsedCode);
-
-                var finalArrayAnimation = CleanArrayAnimation(parsedCode, breakpoints);
-                finalArrayAnimation = JSON.stringify(finalArrayAnimation);
             } catch (error) {
                 console.log(error.message);
                 DeleteFiles(filepath + filename + "_debug", true);
 
-                return callback([], new Error("Falha ao executar o código!"));
+                return callback([], new Error("Falha ao executar!"));
             }
 
             return callback([
@@ -147,7 +158,7 @@ module.exports = app => {
 
     }
 
-    function ParsePascal2Animation(code, input) {
+    function ParsePascal2Animation(code, input, flagMissInput) {
 
         const regexCleanSpaces = /\s\s+/g;
 
@@ -279,9 +290,12 @@ module.exports = app => {
                 if (type == 2 || type == 5) {
                     input[inputCont] = "'" + input[inputCont] + "'";
                 }
+                if(input[inputCont] == undefined)
+                {
+                    flagMissInput[0] = true;
+                }
                 scriptToRun += found[2] + ":=" + input[inputCont] + ";\n";
                 inputCont++;
-                // console.log(instructionsAnimation[linecont - 1]);
                 regexProgram.lastIndex = 0;
 
                 return;
@@ -578,9 +592,18 @@ module.exports = app => {
     }
 
     function DeleteFiles(path, txt = false) {
-        fs.unlinkSync(path + ".pas");
-        fs.unlinkSync(path + ".exe");
-        fs.unlinkSync(path + ".o");
+        if(fs.existsSync(path + ".pas"))
+        {
+            fs.unlinkSync(path + ".pas");
+        }
+        if(fs.existsSync(path + ".exe"))
+        {
+            fs.unlinkSync(path + ".exe");
+        }
+        if(fs.existsSync(path + ".o"))
+        {
+            fs.unlinkSync(path + ".o");
+        }
         if (txt) {
             fs.unlinkSync(path + ".txt");
         }

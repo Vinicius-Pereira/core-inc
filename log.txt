@@ -1,5 +1,0 @@
-(gdb) No symbol table is loaded.  Use the "file" command.
-(gdb) Starting program:  
-No executable specified, use `target exec'.
-(gdb) The program is not being run.
-(gdb) 

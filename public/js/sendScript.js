@@ -7,7 +7,8 @@ $(document).ready(function () {
 
     function sendScript() {
         if (!GetStatus()) {
-            const postUrl = "http://localhost:3000/scripts";
+            const postUrl = window.location.origin + "/scripts";
+            console.log(postUrl);
             var script = {
                 script: GetScript(),
                 input: GetInput(),
