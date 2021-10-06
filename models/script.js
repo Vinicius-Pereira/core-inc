@@ -257,8 +257,6 @@ module.exports = app => {
                     return index === self.indexOf(element);
                 })
 
-                console.log(variables);
-
                 if (variables.length > 0) {
 
                     var arrayVariablesAnimation = Array();
@@ -266,9 +264,9 @@ module.exports = app => {
                     if(quotes != null)
                     {
                         quotes.forEach(quote =>{
-                            arrayVariablesAnimation[contPosition++] = quote;
-                            arrayVariablesAnimation[contPosition++] = GetVarTypeByString("string");
-                            arrayVariablesAnimation[contPosition++] = quote;
+                            arrayVariablesAnimation[contPosition+2] = quote;
+                            arrayVariablesAnimation[contPosition+2] = GetVarTypeByString("string");
+                            arrayVariablesAnimation[contPosition+2] = quote;
                             scriptToRun += "writeln(" + quote + ");\n";
                         })
                     }
@@ -365,6 +363,7 @@ module.exports = app => {
                 cleaningString = cleaningString.replace(regexCleanBool, " ");
 
                 var variables = cleaningString.split(" ");
+                console.log("variaveis: " + variables);
                 variables = variables.filter(function (element) {
                     if (element != "" && element != " " && isNaN(element)) {
                         return element;
@@ -382,15 +381,17 @@ module.exports = app => {
                 scriptToRun += "writeln(" + found[2] + ");\n";
                 scriptToRun += line + "\n";
                 variables.forEach(variable => {
-                    arrayVariablesAnimation[contPosition++] = variable;
-                    arrayVariablesAnimation[contPosition++] = GetVarTypeByString(GetVariableType(variable));
-                    arrayVariablesAnimation[contPosition++] = null;
-                    scriptToRun += "writeln(" + variable + ");\n";
+                    if(isNaN(variable) && variable != found[2])
+                    {
+                        arrayVariablesAnimation[contPosition++] = variable;
+                        arrayVariablesAnimation[contPosition++] = GetVarTypeByString(GetVariableType(variable));
+                        arrayVariablesAnimation[contPosition++] = null;
+                        scriptToRun += "writeln(" + variable + ");\n";
+                    }
                 });
                 scriptToRun += "writeln(" + found[2] + ");\n";
 
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), found[3], null, arrayVariablesAnimation];
-                // console.log(instructionsAnimation[linecont - 1]);
                 regexAttr.lastIndex = 0;
 
                 return
@@ -446,7 +447,7 @@ module.exports = app => {
             scriptToRun += line + "\n";
         });
 
-        console.log(scriptToRun);
+        // console.log(scriptToRun);
         return instructionsAnimation;
     }
 
@@ -513,8 +514,6 @@ module.exports = app => {
                     }
                 } else if (parsedCode[cont][0] == "write(y + z)") {
                     var variables = parsedCode[cont][1][3];
-                    console.log(variables);
-                    console.log(programValues);
                     for (var pos = 2; pos < variables.length; pos = pos + 3) {
                         variables[pos] = programValues.shift();
                     }
