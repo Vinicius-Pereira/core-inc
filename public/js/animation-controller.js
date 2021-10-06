@@ -168,7 +168,7 @@ async function Read(instructionName, nextInstructionName, variable) {
     end = await AskPackage(variable[0], variable[1]);
     end = await GetPackage(variable[0], variable[1]);
     end = await MemoryToOutput(variable[0], variable[1]);
-    end = await Input(variable[0], variable[1], "");
+    end = await Input(variable[0], variable[1]);
     end = await InputToMemory(variable[0], variable[1], variable[2]);
     end = await SetPackage(variable[0], variable[1], variable[2]);
 

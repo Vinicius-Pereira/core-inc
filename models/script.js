@@ -399,13 +399,16 @@ module.exports = app => {
 
 
             if (flagIf) {
-                var ifInfo = Array(3);
+                var ifInfo = Array();
                 if (line.trim().toLowerCase() == "begin") {
                     scriptToRun += line + "\n";
                     scriptToRun += "writeln('true');\n";
                     ifInfo[0] = linecont - 1;
                     ifInfo[1] = linecont;
+                    console.log("nodo: " + ifInfo);
+                    console.log("nodo length: " + ifInfo.length);
                     ifStack.push(ifInfo);
+                    console.log("Pilha:");
                     ifStack.print();
                 } else {
                     scriptToRun += "begin\n";
@@ -418,13 +421,14 @@ module.exports = app => {
                     ifInfo[0] = linecont - 1;
                     ifInfo[1] = linecont;
                     ifInfo[2] = linecont;
+                    console.log("nodo: " + ifInfo);
                     programIfs[programIfs.length] = ifInfo;
-                    console.log(programIfs);
                 }
                 flagIf = false;
                 return;
             } else if (line.trim().toLowerCase() == "end") {
                 var aux = new Array(5);
+                console.log("Pilha:");
                 ifStack.print();
                 aux = ifStack.pop();
                 aux[2] = linecont;
