@@ -206,16 +206,15 @@ module.exports = app => {
 
             found = regexVariable.exec(line);
             if (found) {
-
                 var variables = found[1].replace(regexCleanVarConst, "");
-                variables = variables.replace(regexCleanVar, "");
-                variables = variables.split(" ");
+                // console.log("variaveis clean: " + variables);
+                variables = variables.split(",");
                 variables = variables.filter(function (element) {
                     if (element != "" && element != " ") {
                         return element;
                     }
                 })
-
+                console.log("variaveis: " + variables);
                 StoreVariables(variables, found[2]);
 
                 instructionsAnimation[linecont - 1] = Array(2);
@@ -447,7 +446,7 @@ module.exports = app => {
             scriptToRun += line + "\n";
         });
 
-        // console.log(scriptToRun);
+        console.log(scriptToRun);
         return instructionsAnimation;
     }
 
