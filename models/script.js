@@ -207,14 +207,13 @@ module.exports = app => {
             found = regexVariable.exec(line);
             if (found) {
                 var variables = found[1].replace(regexCleanVarConst, "");
-                // console.log("variaveis clean: " + variables);
+                variables = variables.replace(/\s+/g, "");
                 variables = variables.split(",");
                 variables = variables.filter(function (element) {
                     if (element != "" && element != " ") {
                         return element;
                     }
                 })
-                console.log("variaveis: " + variables);
                 StoreVariables(variables, found[2]);
 
                 instructionsAnimation[linecont - 1] = Array(2);
@@ -294,15 +293,18 @@ module.exports = app => {
             found = regexRead.exec(line);
             if (found) {
                 var type = GetVarTypeByString(GetVariableType(found[2]));
+                console.log(found[2]);
                 instructionsAnimation[linecont - 1] = Array(2);
                 instructionsAnimation[linecont - 1][0] = "read";
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), [found[2], type, input[inputCont]]];
-                if (type == 2 || type == 5) {
-                    input[inputCont] = "'" + input[inputCont] + "'";
-                }
+                
                 if(input[inputCont] == undefined)
                 {
                     flagMissInput[0] = true;
+                }
+                
+                if (type == 2 || type == 5) {
+                    input[inputCont] = "'" + input[inputCont] + "'";
                 }
                 scriptToRun += found[2] + ":=" + input[inputCont] + ";\n";
                 inputCont++;
