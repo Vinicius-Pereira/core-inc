@@ -233,6 +233,7 @@ module.exports = app => {
 
                 instructionsAnimation[linecont - 1] = Array(2);
 
+                var quotes = found[2].match(regexQuote, "");
                 var withoutQuote = found[2].replace(regexQuote, "");
                 if (withoutQuote == "") {
                     scriptToRun += "write('');\n";
@@ -258,25 +259,37 @@ module.exports = app => {
 
                 console.log(variables);
 
-                if (variables.length > 1) {
+                if (variables.length > 0) {
 
                     var arrayVariablesAnimation = Array();
                     var contPosition = 0;
+                    if(quotes != null)
+                    {
+                        quotes.forEach(quote =>{
+                            arrayVariablesAnimation[contPosition++] = quote;
+                            arrayVariablesAnimation[contPosition++] = GetVarTypeByString("string");
+                            arrayVariablesAnimation[contPosition++] = quote;
+                            scriptToRun += "writeln(" + quote + ");\n";
+                        })
+                    }
+
                     variables.forEach(variable => {
                         arrayVariablesAnimation[contPosition++] = variable;
                         arrayVariablesAnimation[contPosition++] = GetVarTypeByString(GetVariableType(variable));
-                        arrayVariablesAnimation[contPosition++] = "algo";
+                        arrayVariablesAnimation[contPosition++] = null;
                         scriptToRun += "writeln(" + variable + ");\n";
                     });
 
-                    instructionsAnimation[linecont - 1][0] = "write(y + z)";
-                    instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), line, arrayVariablesAnimation];
-
-
-                } else {
-                    scriptToRun += "writeln(" + variables[0] + ");\n";
-                    instructionsAnimation[linecont - 1][0] = "write";
-                    instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), [variables[0], GetVarTypeByString(GetVariableType(variables[0])), null]];
+                    if(variables.length == 1 && quotes == null)
+                    {
+                        instructionsAnimation[linecont - 1][0] = "write";
+                        instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), [variables[0], GetVarTypeByString(GetVariableType(variables[0])), null]];
+                    }
+                    else
+                    {
+                        instructionsAnimation[linecont - 1][0] = "write(y + z)";
+                        instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), line, arrayVariablesAnimation];
+                    }
                 }
                 return;
             }
@@ -433,7 +446,7 @@ module.exports = app => {
             scriptToRun += line + "\n";
         });
 
-        // console.log(scriptToRun);
+        console.log(scriptToRun);
         return instructionsAnimation;
     }
 
@@ -605,7 +618,10 @@ module.exports = app => {
             fs.unlinkSync(path + ".o");
         }
         if (txt) {
-            fs.unlinkSync(path + ".txt");
+            if(fs.existsSync(path + ".txt"))
+            {
+                fs.unlinkSync(path + ".txt");
+            }
         }
     }
 

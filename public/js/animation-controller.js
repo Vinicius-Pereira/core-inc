@@ -212,6 +212,7 @@ async function CalcAndSave(instructionName, nextInstructionName, expression, res
 }
 
 async function CalcAndWrite(instructionName, nextInstructionName, expression, variables) {
+    var finalValue = "";
     SetInstructionNames(instructionName, nextInstructionName);
     end = await GetInstruction(instructionName, nextInstructionName);
     for (var a = 0; a < variables.length; a = a + 3) {
@@ -224,6 +225,7 @@ async function CalcAndWrite(instructionName, nextInstructionName, expression, va
         }
         end = await GetPackage(variables[a], variables[a + 1], variables[a + 2]);
         end = await PutPackageRegister(variables[a], variables[a + 1], variables[a + 2]);
+        finalValue += variables[a + 2];
     }
     for (var a = 0; a < 4; a++) {
         if (register[a] != 0) {
@@ -231,8 +233,8 @@ async function CalcAndWrite(instructionName, nextInstructionName, expression, va
         }
     }
     end = await Calculate(expression, expression);
-    end = await RegisterToOutput(variables[0], variables[1]);
-    end = await Output(variables[0], variables[1]);
+    end = await RegisterToOutput(variables[0], variables[1], expression);
+    end = await Output(variables[0], variables[1], expression);
 
     return "done!";
 }
