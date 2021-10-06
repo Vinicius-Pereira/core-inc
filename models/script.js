@@ -121,7 +121,7 @@ module.exports = app => {
                 }
                 else
                 {
-                    console.log("Input missing!");
+                    console.log("Falta de Input!");
                     return callback([], new Error("Entrada de dados necessária!"));
                 }
 
@@ -345,7 +345,6 @@ module.exports = app => {
                 flagIf = true;
 
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), found[1], null, arrayVariablesAnimation];
-                // console.log(instructionsAnimation[linecont - 1]);
                 regexIf.lastIndex = 0;
                 return
             }
@@ -446,7 +445,7 @@ module.exports = app => {
             scriptToRun += line + "\n";
         });
 
-        console.log(scriptToRun);
+        // console.log(scriptToRun);
         return instructionsAnimation;
     }
 
