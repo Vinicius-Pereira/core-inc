@@ -1,3 +1,5 @@
+const { parse } = require("path");
+
 class Stack {
     constructor() {
         this.data = [];
@@ -25,7 +27,6 @@ class Stack {
     print() {
         var top = this.top - 1; // because top points to index where new    element to be inserted
         while (top >= 0) { // print upto 0th index
-            console.log(this.data[top]);
             top--;
         }
     }
@@ -36,7 +37,6 @@ class Stack {
         if (index != 0) {
             this._reverse(index - 1);
         }
-        console.log(this.data[index]);
     }
 }
 module.exports = app => {
@@ -65,9 +65,9 @@ module.exports = app => {
             fs = require('fs');
             filename = nanoid(10);
 
-            var parsedCode;
+            var parsedCode = [];
             var breakpoints;
-            var input = Array();
+            var input = [];
             var flagMissInput = Array();
             flagMissInput[0] = false;
 
@@ -126,10 +126,17 @@ module.exports = app => {
                 }
 
             } catch (error) {
-                console.log(error.message);
+                console.log(error);
                 DeleteFiles(filepath + filename + "_debug", true);
 
-                return callback([], new Error("Falha ao executar!"));
+                if(flagMissInput[0])
+                {
+                    return callback([], new Error("Entrada de dados necessária!"));
+                }
+                else
+                {
+                    return callback([], new Error("Falha ao executar!"));
+                }
             }
 
             return callback([
@@ -347,30 +354,43 @@ module.exports = app => {
 
             found = regexRead.exec(line);
             if (found) {
-                if(input[inputCont] == undefined)
-                {
-                    flagMissInput[0] = true;
-                }
-                console.log(found);
                 variables = found[2].replace(/\s+/g, "");
                 variables = variables.split(",");
                 variables = variables.filter(function (element) {
                     if (element != "" && element != " ") {
                         return element;
                     }
+                });
+                variables = variables.filter(function (element, index, self) {
+                    return index === self.indexOf(element);
                 })
-                console.log(variables);
 
-                var type = GetVarTypeByString(GetVariableType(found[2]));
+                var arrayVariablesAnimation = [];
+                var contPosition = 0;
+                variables.forEach(variable => {
+                    if(isNaN(variable))
+                    {
+                        if(input[inputCont] == undefined)
+                        {
+                            flagMissInput[0] = true;
+                        }
+
+                        var type = GetVarTypeByString(GetVariableType(variable))
+                        arrayVariablesAnimation[contPosition++] = variable;
+                        arrayVariablesAnimation[contPosition++] = type;
+                        arrayVariablesAnimation[contPosition++] = input[inputCont];
+                        
+                        if (type == 2 || type == 5) {
+                            input[inputCont] = "'" + input[inputCont] + "'";
+                        }
+                        scriptToRun += variable + ":=" + input[inputCont] + ";\n";
+                        inputCont++;
+                    }
+                });
+                
                 instructionsAnimation[linecont - 1] = Array(2);
                 instructionsAnimation[linecont - 1][0] = "read";
-                instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), [found[2], type, input[inputCont]]];
-                
-                if (type == 2 || type == 5) {
-                    input[inputCont] = "'" + input[inputCont] + "'";
-                }
-                scriptToRun += found[2] + ":=" + input[inputCont] + ";\n";
-                inputCont++;
+                instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), arrayVariablesAnimation];
                 regexProgram.lastIndex = 0;
 
                 return;
@@ -502,8 +522,6 @@ module.exports = app => {
                 return element;
             }
         });
-        console.log("\n\n\n PARSED CODE")
-        console.log(parsedCode);
 
         while (cont < parsedCode.length) {
             if (parsedCode[cont] == null) {
@@ -590,9 +608,7 @@ module.exports = app => {
         indexFilter = indexFilter.filter(function (element, index, self) {
             return index === self.indexOf(element);
         })
-        console.log(indexFilter);
         indexFilter = indexFilter.sort(function (a, b) { return a - b });
-        console.log(indexFilter);
 
         for (var index = indexFilter.length - 1; index >= 0; index--) {
             parsedCode.splice(indexFilter[index]-1, 1);
@@ -604,7 +620,45 @@ module.exports = app => {
             }
         })
 
-        console.log(parsedCode);
+        parsedCode = SplitRead(parsedCode);
+
+        return parsedCode;
+    }
+
+    function SplitRead(parsedCode)
+    {
+        var aux = Array.from(parsedCode);
+        var cont = 1;
+        var size = 3;
+        var auxVar = [];
+
+        aux.forEach(function(line, i){
+            if(line[0] == "read" && line[1][2].length > 3)
+            {
+                variables = Array.from(parsedCode[i][1][2]);
+                while(variables.length > 0)
+                {
+                    auxVar.push(variables.splice(0, size));
+                }
+                parsedCode[i][1][2] = Array.from(auxVar[0]);
+                while(cont < auxVar.length)
+                {
+                    var auxNode = copy(parsedCode[i]);
+                    auxNode[1][2] = Array.from(auxVar[cont]);
+                    parsedCode.splice((i+cont), 0, auxNode);
+                    if((cont+1) < auxVar.length)
+                    {
+                        parsedCode[i+cont][1][1] = parsedCode[i+cont][1][0];
+                    }
+                    else
+                    {
+                        parsedCode[i+cont][1][1] = auxNode[1][1];
+                    }
+                    cont++;
+                }
+                parsedCode[i][1][1] = parsedCode[i][1][0];
+            }
+        });
         return parsedCode;
     }
 
@@ -669,6 +723,22 @@ module.exports = app => {
             return true;
         }
         return false;
+    }
+
+    // Função de deep copy pra array, pq o javascript não faz :)
+    function copy(aObject) {
+        if (!aObject) {
+          return aObject;
+        }
+      
+        let v;
+        let bObject = Array.isArray(aObject) ? [] : {};
+        for (const k in aObject) {
+          v = aObject[k];
+          bObject[k] = (typeof v === "object") ? copy(v) : v;
+        }
+      
+        return bObject;
     }
 
 
