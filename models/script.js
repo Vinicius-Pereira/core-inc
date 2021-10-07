@@ -184,6 +184,7 @@ module.exports = app => {
         var found;
         var ifStack = new Stack();
         var flagIf = false;
+        var appendToRun = null;
 
         lines = code.split("\n");
         lines.forEach(line => {
@@ -191,6 +192,60 @@ module.exports = app => {
             line = line.replace(/\t/g, '');
             found = null;
             console.log(linecont + "-" + line);
+
+            if (flagIf) {
+                flagIf = false;
+                var ifInfo = Array();
+                if (line.trim().toLowerCase() == "begin") {
+                    scriptToRun += line + "\n";
+                    scriptToRun += "writeln('true');\n";
+                    ifInfo[0] = linecont - 1;
+                    ifInfo[1] = linecont;
+                    ifStack.push(ifInfo);
+                    ifStack.print();
+                    return
+                } else {
+                    scriptToRun += "begin\n";
+                    scriptToRun += "writeln('true');\n";
+                    if (lines[linecont] != undefined)
+                    {
+                        if(lines[linecont].trim().toLowerCase() == "else") {
+                            appendToRun = "end\n";
+                        } else {
+                            appendToRun = "end;\n";
+                        }
+                    } else{
+                        scriptToRun += "end;\n";
+                        return
+                    }   
+                    ifInfo[0] = linecont - 1;
+                    ifInfo[1] = linecont;
+                    ifInfo[2] = linecont + 1;
+                    programIfs[programIfs.length] = ifInfo;
+                }
+            } else if (line.trim().toLowerCase() == "end") {
+                scriptToRun += line + "\n";
+                var aux = new Array(5);
+                ifStack.print();
+                aux = ifStack.pop();
+                aux[2] = linecont;
+                aux[3] = linecont + 2;
+                if (lines[linecont + 1].trim().toLowerCase() != "begin") {
+                    aux[4] = linecont + 2;
+                    programIfs[programIfs.length] = aux;
+                } else {
+                    ifStack.push(aux);
+                    ifStack.print();
+                }
+                return
+            } else if (line.trim().toLowerCase() == "end;") {
+                scriptToRun += line + "\n";
+                ifStack.print();
+                var aux = ifStack.pop();
+                aux[aux.length] = linecont;
+                programIfs[programIfs.length] = aux;
+                return
+            }
 
             line = line.replace(regexCleanSpaces, " ");
             found = regexProgram.exec(line);
@@ -219,6 +274,7 @@ module.exports = app => {
                 instructionsAnimation[linecont - 1] = Array(2);
                 instructionsAnimation[linecont - 1][0] = "var";
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), [found[1], GetVarTypeByString(found[2]), ""]];
+                console.log(instructionsAnimation[linecont - 1]);
                 regexVariable.lastIndex = 0;
 
                 scriptToRun += line + "\n";
@@ -234,9 +290,9 @@ module.exports = app => {
                 var quotes = found[2].match(regexQuote, "");
                 var withoutQuote = found[2].replace(regexQuote, "");
                 if (withoutQuote == "") {
-                    scriptToRun += "write('');\n";
+                    scriptToRun += line + "\n";
                     instructionsAnimation[linecont - 1][0] = "write";
-                    instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), [found[2], 5, found[2]]];
+                    instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), [null, 5, null]];
                     return;
                 }
 
@@ -292,16 +348,15 @@ module.exports = app => {
 
             found = regexRead.exec(line);
             if (found) {
-                var type = GetVarTypeByString(GetVariableType(found[2]));
-                console.log(found[2]);
-                instructionsAnimation[linecont - 1] = Array(2);
-                instructionsAnimation[linecont - 1][0] = "read";
-                instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), [found[2], type, input[inputCont]]];
-                
                 if(input[inputCont] == undefined)
                 {
                     flagMissInput[0] = true;
                 }
+
+                var type = GetVarTypeByString(GetVariableType(found[2]));
+                instructionsAnimation[linecont - 1] = Array(2);
+                instructionsAnimation[linecont - 1][0] = "read";
+                instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), [found[2], type, input[inputCont]]];
                 
                 if (type == 2 || type == 5) {
                     input[inputCont] = "'" + input[inputCont] + "'";
@@ -338,32 +393,34 @@ module.exports = app => {
                 var arrayVariablesAnimation = Array();
                 var contPosition = 0;
                 variables.forEach(variable => {
-                    arrayVariablesAnimation[contPosition++] = variable;
-                    arrayVariablesAnimation[contPosition++] = GetVarTypeByString(GetVariableType(variable));
-                    arrayVariablesAnimation[contPosition++] = null;
-                    scriptToRun += "writeln(" + variable + ");\n";
+                    if(isNaN(variable))
+                    {
+                        arrayVariablesAnimation[contPosition++] = variable;
+                        arrayVariablesAnimation[contPosition++] = GetVarTypeByString(GetVariableType(variable));
+                        arrayVariablesAnimation[contPosition++] = null;
+                        scriptToRun += "writeln(" + variable + ");\n";
+                    }
                 });
                 scriptToRun += line + "\n";
                 flagIf = true;
-
+                
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), found[1], null, arrayVariablesAnimation];
                 regexIf.lastIndex = 0;
                 return
             }
-
+            
             found = regexAttr.exec(line);
             if (found) {
                 instructionsAnimation[linecont - 1] = Array(2);
                 instructionsAnimation[linecont - 1][0] = "x = y + z";
-
+                
                 var cleaningString = found[3].replace(regexQuote, "");
                 cleaningString = cleaningString.replace(regexCleanFunctions, " ");
                 cleaningString = cleaningString.replace(regexCleanVar, "");
                 cleaningString = cleaningString.replace(regexCleanSignals, " ");
                 cleaningString = cleaningString.replace(regexCleanBool, " ");
-
+                
                 var variables = cleaningString.split(" ");
-                console.log("variaveis: " + variables);
                 variables = variables.filter(function (element) {
                     if (element != "" && element != " " && isNaN(element)) {
                         return element;
@@ -372,7 +429,7 @@ module.exports = app => {
                 variables = variables.filter(function (element, index, self) {
                     return index === self.indexOf(element);
                 })
-
+                
                 var arrayVariablesAnimation = Array();
                 arrayVariablesAnimation[0] = found[2];
                 arrayVariablesAnimation[1] = GetVarTypeByString(GetVariableType(found[2]));
@@ -390,75 +447,30 @@ module.exports = app => {
                     }
                 });
                 scriptToRun += "writeln(" + found[2] + ");\n";
-
+                
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), found[3], null, arrayVariablesAnimation];
                 regexAttr.lastIndex = 0;
-
+                
                 return
             }
+            
 
-
-            if (flagIf) {
-                var ifInfo = Array();
-                if (line.trim().toLowerCase() == "begin") {
-                    scriptToRun += line + "\n";
-                    scriptToRun += "writeln('true');\n";
-                    ifInfo[0] = linecont - 1;
-                    ifInfo[1] = linecont;
-                    console.log("nodo: " + ifInfo);
-                    console.log("nodo length: " + ifInfo.length);
-                    ifStack.push(ifInfo);
-                    console.log("Pilha:");
-                    ifStack.print();
-                } else {
-                    scriptToRun += "begin\n";
-                    scriptToRun += "writeln('true');\n";
-                    if (lines[linecont + 1].trim().toLowerCase() == "else") {
-                        scriptToRun += "end\n";
-                    } else {
-                        scriptToRun += "end;\n";
-                    }
-                    ifInfo[0] = linecont - 1;
-                    ifInfo[1] = linecont;
-                    ifInfo[2] = linecont;
-                    console.log("nodo: " + ifInfo);
-                    programIfs[programIfs.length] = ifInfo;
-                }
-                flagIf = false;
-                return;
-            } else if (line.trim().toLowerCase() == "end") {
-                var aux = new Array(5);
-                console.log("Pilha:");
-                ifStack.print();
-                aux = ifStack.pop();
-                aux[2] = linecont;
-                aux[3] = linecont + 2;
-                if (lines[linecont + 1].trim().toLowerCase() != "begin") {
-                    aux[4] = linecont + 2;
-                    programIfs[programIfs.length] = aux;
-                    console.log(programIfs);
-                } else {
-                    ifStack.push(aux);
-                    ifStack.print();
-                }
-            } else if (line.trim().toLowerCase() == "end;") {
-                ifStack.print();
-                var aux = ifStack.pop();
-                aux[aux.length] = linecont;
-                programIfs[programIfs.length] = aux;
-                console.log(programIfs);
+            if(appendToRun != null)
+            {
+                scriptToRun += appendToRun;
+                appendToRun = null;
             }
             scriptToRun += line + "\n";
         });
-
-        // console.log(scriptToRun);
+        console.log(scriptToRun);
         return instructionsAnimation;
     }
 
     function FindNextInstruction(code, numLine) {
         for (var cont = numLine; cont < code.length; cont++) {
-            if (code[cont] != "") {
-                var string = code[cont].replace(/\t/g, '');
+            var string = code[cont].replace(/\t/g, '');
+            string = string.trim();
+            if (string != "") {
                 return string;
             }
         }
@@ -482,6 +494,9 @@ module.exports = app => {
                 return element;
             }
         });
+        console.log("\n\n\n PARSED CODE")
+        console.log(parsedCode);
+
         while (cont < parsedCode.length) {
             if (parsedCode[cont] == null) {
                 index = programIfs.findIndex(element => element[0] == line);
@@ -502,6 +517,8 @@ module.exports = app => {
                         parsedCode[cont][1][3] = "Falso";
                         line = programIfs[index][2];
                         cont = programIfs[index][2] - 1;
+                        console.log("program if: " + programIfs[index]);
+                        console.log(parsedCode);
                     } else {
                         parsedCode[cont][1][3] = "Verdadeiro";
                         if (programIfs[index][3] != null) {
@@ -526,6 +543,7 @@ module.exports = app => {
                     var variable = parsedCode[cont][1][2];
                     if (variable[2] == null) {
                         variable[2] = programValues.shift();
+                        variable[0] = variable[2];
                         parsedCode[cont][1][2] = variable;
                     }
                 } else if (parsedCode[cont][0] == "x = y + z") {
@@ -552,6 +570,8 @@ module.exports = app => {
                 }
             }
         });
+        console.log("Index Filter\n");
+        console.log(indexFilter);
 
         if (breakpoints != null) {
             for (var cont = 0; cont < parsedCode.length; cont++) {
@@ -566,10 +586,12 @@ module.exports = app => {
         indexFilter = indexFilter.filter(function (element, index, self) {
             return index === self.indexOf(element);
         })
+        console.log(indexFilter);
         indexFilter = indexFilter.sort(function (a, b) { return a - b });
+        console.log(indexFilter);
 
         for (var index = indexFilter.length - 1; index >= 0; index--) {
-            parsedCode.splice(indexFilter[index], 1);
+            parsedCode.splice(indexFilter[index]-1, 1);
         }
 
         parsedCode = parsedCode.filter(function (element) {
@@ -578,6 +600,7 @@ module.exports = app => {
             }
         })
 
+        console.log(parsedCode);
         return parsedCode;
     }
 
