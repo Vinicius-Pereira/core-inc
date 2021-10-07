@@ -274,7 +274,6 @@ module.exports = app => {
                 instructionsAnimation[linecont - 1] = Array(2);
                 instructionsAnimation[linecont - 1][0] = "var";
                 instructionsAnimation[linecont - 1][1] = [found[0], FindNextInstruction(lines, linecont), [found[1], GetVarTypeByString(found[2]), ""]];
-                console.log(instructionsAnimation[linecont - 1]);
                 regexVariable.lastIndex = 0;
 
                 scriptToRun += line + "\n";
@@ -352,6 +351,15 @@ module.exports = app => {
                 {
                     flagMissInput[0] = true;
                 }
+                console.log(found);
+                variables = found[2].replace(/\s+/g, "");
+                variables = variables.split(",");
+                variables = variables.filter(function (element) {
+                    if (element != "" && element != " ") {
+                        return element;
+                    }
+                })
+                console.log(variables);
 
                 var type = GetVarTypeByString(GetVariableType(found[2]));
                 instructionsAnimation[linecont - 1] = Array(2);
@@ -462,7 +470,7 @@ module.exports = app => {
             }
             scriptToRun += line + "\n";
         });
-        console.log(scriptToRun);
+        // console.log(scriptToRun);
         return instructionsAnimation;
     }
 
@@ -517,8 +525,6 @@ module.exports = app => {
                         parsedCode[cont][1][3] = "Falso";
                         line = programIfs[index][2];
                         cont = programIfs[index][2] - 1;
-                        console.log("program if: " + programIfs[index]);
-                        console.log(parsedCode);
                     } else {
                         parsedCode[cont][1][3] = "Verdadeiro";
                         if (programIfs[index][3] != null) {
@@ -570,15 +576,13 @@ module.exports = app => {
                 }
             }
         });
-        console.log("Index Filter\n");
-        console.log(indexFilter);
 
         if (breakpoints != null) {
             for (var cont = 0; cont < parsedCode.length; cont++) {
                 if (breakpoints.length > 0 && cont == breakpoints[0]) {
                     breakpoints.shift();
                 } else {
-                    indexFilter.push(cont);
+                    indexFilter.push(cont+1);
                 }
             }
         }
