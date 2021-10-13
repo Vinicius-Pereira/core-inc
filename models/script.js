@@ -173,8 +173,10 @@ module.exports = app => {
         const regexProgram = /program\s*(\S+);/gi;
         const regexVariable = /(.*):(?:\s)?(char|integer|boolean|real|string)/gi;
         const regexWrite = /((?:write|writeln)(?:\s)?\()(.*)(\))/i;
+        const regexReplaceWrite = /((?:write)(\s)*\()/i;
         const regexRead = /((?:read|readln)(?:\s)?\()(.*)(\))/i;
         const regexIf = /if(?:\s)?(.*)\sthen/gi;
+        const regexElse = /(else)(?:\s)if(?:\s)?(.*)\sthen/gi;
         const regexAttr = /((\S+)(?:\s?):=).(.+);/gi;
 
         const regexQuote = /(["'])(?:(?=(\\?))\2.)*?\1/gi;
@@ -218,7 +220,8 @@ module.exports = app => {
                     scriptToRun += "writeln('true');\n";
                     if (lines[linecont] != undefined)
                     {
-                        if(lines[linecont].trim().toLowerCase() == "else") {
+                        var foundElse = regexElse.exec(lines[linecont]);
+                        if(lines[linecont].trim().toLowerCase() == "else" || (foundElse != null && foundElse[1].trim().toLowerCase() == "else")) {
                             appendToRun = "end\n";
                         } else {
                             appendToRun = "end;\n";
@@ -231,6 +234,7 @@ module.exports = app => {
                     ifInfo[1] = linecont;
                     ifInfo[2] = linecont + 1;
                     programIfs[programIfs.length] = ifInfo;
+                    regexElse.lastIndex = 0;
                 }
             } else if (line.trim().toLowerCase() == "end") {
                 scriptToRun += line + "\n";
@@ -295,14 +299,18 @@ module.exports = app => {
 
                 instructionsAnimation[linecont - 1] = Array(2);
 
+                // Fix problem when values concat forward due missing \n
+                line = line.replace(regexReplaceWrite, "writeln(");
+                console.log(line);
+
                 var quotes = found[2].match(regexQuote, "");
                 var withoutQuote = found[2].replace(regexQuote, "");
                 if (withoutQuote == "") {
                     if(!regexEndOfLine.exec(line))
                     {
                         line += ";";
-                        console.log(linecont + "-" + line);
                     }
+                    regexEndOfLine.lastIndex = 0;
                     scriptToRun += line + "\n";
                     instructionsAnimation[linecont - 1][0] = "write";
                     instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), [null, 5, null]];
@@ -405,6 +413,7 @@ module.exports = app => {
 
             found = regexIf.exec(line);
             if (found) {
+
                 instructionsAnimation[linecont - 1] = Array(2);
                 instructionsAnimation[linecont - 1][0] = "if";
 
@@ -424,7 +433,7 @@ module.exports = app => {
                 variables = variables.filter(function (element, index, self) {
                     return index === self.indexOf(element);
                 })
-
+                
                 var arrayVariablesAnimation = Array();
                 var contPosition = 0;
                 variables.forEach(variable => {
@@ -436,6 +445,13 @@ module.exports = app => {
                         scriptToRun += "writeln(" + variable + ");\n";
                     }
                 });
+                
+                if(appendToRun != null)
+                {
+                    scriptToRun += appendToRun;
+                    appendToRun = null;
+                }
+
                 scriptToRun += line + "\n";
                 flagIf = true;
                 
@@ -530,6 +546,7 @@ module.exports = app => {
                 return element;
             }
         });
+        console.log(programValues);
 
         while (cont < parsedCode.length) {
             if (parsedCode[cont] == null) {
