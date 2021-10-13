@@ -168,6 +168,7 @@ module.exports = app => {
     function ParsePascal2Animation(code, input, flagMissInput) {
 
         const regexCleanSpaces = /\s\s+/g;
+        const regexEndOfLine = /([\s\S])(;)/gi;
 
         const regexProgram = /program\s*(\S+);/gi;
         const regexVariable = /(.*):(?:\s)?(char|integer|boolean|real|string)/gi;
@@ -198,6 +199,7 @@ module.exports = app => {
             linecont++;
             line = line.replace(/\t/g, '');
             found = null;
+            if(line)
             console.log(linecont + "-" + line);
 
             if (flagIf) {
@@ -296,6 +298,11 @@ module.exports = app => {
                 var quotes = found[2].match(regexQuote, "");
                 var withoutQuote = found[2].replace(regexQuote, "");
                 if (withoutQuote == "") {
+                    if(!regexEndOfLine.exec(line))
+                    {
+                        line += ";";
+                        console.log(linecont + "-" + line);
+                    }
                     scriptToRun += line + "\n";
                     instructionsAnimation[linecont - 1][0] = "write";
                     instructionsAnimation[linecont - 1][1] = [line, FindNextInstruction(lines, linecont), [null, 5, null]];
@@ -488,9 +495,10 @@ module.exports = app => {
                 scriptToRun += appendToRun;
                 appendToRun = null;
             }
+
             scriptToRun += line + "\n";
         });
-        // console.log(scriptToRun);
+        console.log(scriptToRun);
         return instructionsAnimation;
     }
 
