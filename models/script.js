@@ -207,17 +207,19 @@ module.exports = app => {
             if (flagIf) {
                 flagIf = false;
                 var ifInfo = Array();
+                ifInfo[0] = linecont - 1;
+                ifInfo[1] = linecont;
                 if (line.trim().toLowerCase() == "begin") {
-                    scriptToRun += line + "\n";
-                    scriptToRun += "writeln('true');\n";
-                    ifInfo[0] = linecont - 1;
-                    ifInfo[1] = linecont;
                     ifStack.push(ifInfo);
                     ifStack.print();
+                    scriptToRun += line + "\n";
+                    scriptToRun += "writeln('true " + ifInfo[0] +"');\n";
                     return
                 } else {
+                    ifInfo[2] = linecont;
                     scriptToRun += "begin\n";
-                    scriptToRun += "writeln('true');\n";
+                    scriptToRun += "writeln('true " + ifInfo[0] +"');\n";
+                    
                     if (lines[linecont] != undefined)
                     {
                         var foundElse = regexElse.exec(lines[linecont]);
@@ -229,10 +231,7 @@ module.exports = app => {
                     } else{
                         scriptToRun += "end;\n";
                         return
-                    }   
-                    ifInfo[0] = linecont - 1;
-                    ifInfo[1] = linecont;
-                    ifInfo[2] = linecont + 1;
+                    } 
                     programIfs[programIfs.length] = ifInfo;
                     regexElse.lastIndex = 0;
                 }
@@ -301,7 +300,6 @@ module.exports = app => {
 
                 // Fix problem when values concat forward due missing \n
                 line = line.replace(regexReplaceWrite, "writeln(");
-                console.log(line);
 
                 var quotes = found[2].match(regexQuote, "");
                 var withoutQuote = found[2].replace(regexQuote, "");
@@ -390,7 +388,8 @@ module.exports = app => {
                             flagMissInput[0] = true;
                         }
 
-                        var type = GetVarTypeByString(GetVariableType(variable))
+                        var type = GetVarTypeByString(GetVariableType(variable));
+                        UpdateVariable(variable, input[inputCont]);
                         arrayVariablesAnimation[contPosition++] = variable;
                         arrayVariablesAnimation[contPosition++] = type;
                         arrayVariablesAnimation[contPosition++] = input[inputCont];
@@ -442,7 +441,7 @@ module.exports = app => {
                         arrayVariablesAnimation[contPosition++] = variable;
                         arrayVariablesAnimation[contPosition++] = GetVarTypeByString(GetVariableType(variable));
                         arrayVariablesAnimation[contPosition++] = null;
-                        scriptToRun += "writeln(" + variable + ");\n";
+                        // scriptToRun += "writeln(" + variable + ");\n";
                     }
                 });
                 
@@ -529,12 +528,13 @@ module.exports = app => {
         return "";
     }
 
-    function StoreVariables(variables, type) {
+    function StoreVariables(variables, type, value = null) {
         variables.forEach(element => {
             var index = programVariables.length;
-            programVariables[index] = Array(2);
+            programVariables[index] = Array(3);
             programVariables[index][0] = element;
             programVariables[index][1] = type;
+            programVariables[index][2] = value;
         });
     }
 
@@ -546,6 +546,9 @@ module.exports = app => {
                 return element;
             }
         });
+
+
+        console.log("PROGRAM VALUES");
         console.log(programValues);
 
         while (cont < parsedCode.length) {
@@ -558,14 +561,18 @@ module.exports = app => {
             } else {
                 if (parsedCode[cont][0] == "if") {
                     var variables = parsedCode[cont][1][4];
-                    for (var pos = 2; pos < variables.length; pos = pos + 3) {
-                        variables[pos] = programValues.shift();
+                    for (var pos = 0; pos < variables.length; pos = pos + 3) {
+                        var aux = GetVariable(variables[pos]);
+                        variables[pos+2] = aux[2];
                     }
                     parsedCode[cont][1][4] = variables;
                     index = programIfs.findIndex(element => element[0] == line);
-                    var resultExpression = programValues.shift();
-                    if (resultExpression != "true") {
+                    var aux = programValues.shift();
+                    console.log(aux);
+                    var resultExpression = aux != undefined ? aux.split(" ") : aux;
+                    if (resultExpression == undefined || (resultExpression[0] != "true" || (resultExpression[0] == "true" && parseInt(resultExpression[1]) != line))) {
                         parsedCode[cont][1][3] = "Falso";
+                        programValues.unshift(aux);
                         line = programIfs[index][2];
                         cont = programIfs[index][2] - 1;
                     } else {
@@ -599,13 +606,19 @@ module.exports = app => {
                     var variables = parsedCode[cont][1][4];
                     for (var pos = 2; pos < variables.length; pos = pos + 3) {
                         variables[pos] = programValues.shift();
+                        UpdateVariable(variables[pos-2], variables[pos]);
                     }
                     parsedCode[cont][1][3] = programValues.shift();
+                    UpdateVariable(parsedCode[cont][1][1], parsedCode[cont][1][3]);
                 }
             }
             cont++;
             line++;
         }
+        // console.log("---------------- CODIGO CONVERTIDO ---------------")
+        // parsedCode.forEach(element => {
+        //     console.log(element);
+        // });
         return parsedCode;
     }
 
@@ -619,6 +632,9 @@ module.exports = app => {
                 }
             }
         });
+        console.log(indexFilter);
+        console.log("PROGRAM IF:\n");
+        console.log(programIfs);
 
         if (breakpoints != null) {
             for (var cont = 0; cont < parsedCode.length; cont++) {
@@ -646,7 +662,10 @@ module.exports = app => {
         })
 
         parsedCode = SplitRead(parsedCode);
-
+        console.log("---------------- CODIGO FINAL ---------------");
+        parsedCode.forEach(element => {
+            console.log(element);
+        });
         return parsedCode;
     }
 
@@ -687,9 +706,20 @@ module.exports = app => {
         return parsedCode;
     }
 
+    function GetVariable(variable) {
+        index = programVariables.findIndex(element => element[0] == variable);
+        return programVariables[index];
+    }
+
     function GetVariableType(variable) {
         index = programVariables.findIndex(element => element[0] == variable);
         return programVariables[index][1];
+    }
+
+    function UpdateVariable(variable, value) {
+        index = programVariables.findIndex(element => element[0] == variable);
+        programVariables[index][2] = value;
+        return programVariables[index][2];
     }
 
     function GetVarTypeByString(string) {
