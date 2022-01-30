@@ -232,7 +232,7 @@ async function CalcAndWrite(instructionName, nextInstructionName, expression, va
             end = await GetPackageRegister(a + 1);
         }
     }
-    end = await Calculate(expression, expression);
+    end = await Calculate(instructionName, expression);
     end = await RegisterToOutput(variables[0], variables[1], expression);
     end = await Output(variables[0], variables[1], expression);
 
