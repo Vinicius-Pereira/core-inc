@@ -179,11 +179,19 @@
     display: none;
     position: fixed;
     margin-top: 10vh;
-    margin-left: 70vh;
+    margin-left: 60vh;
     z-index: 5;
 }
 
 #step-8{
+    display: none;
+    position: fixed;
+    margin-top: 10vh;
+    margin-left: 70vh;
+    z-index: 5;
+}
+
+#step-9{
     display: none;
     position: fixed;
     margin-top: 8vh;
@@ -191,15 +199,15 @@
     z-index: 5;
 }
 
-#step-8:after{
+#step-9:after{
     left: 50%;
     border-top: none;
     border-bottom: 20px solid #2e3036;
-    top: -20px; /*localização. Experimente alterar para 'bottom'*/
+    top: -20px; 
     bottom: 0;
 }
 
-#step-9{
+#step-10{
     font-weight: bold;
     display: none;
     position: fixed;
@@ -209,7 +217,7 @@
     z-index: 5;
 }
 
-#step-9:after{
+#step-10:after{
     display: none;
 }
 
@@ -245,6 +253,11 @@
 
     #step-7{
         margin-top: 8vh;
+        margin-left: 30%;
+    }
+
+    #step-8{
+        margin-top: 8vh;
         margin-left: 35%;
     }
     
@@ -276,6 +289,11 @@
     }
 
     #step-7{
+        margin-top: 8vh;
+        margin-left: 30%;
+    }
+
+    #step-8{
         margin-top: 8vh;
         margin-left: 35%;
     }
@@ -317,11 +335,16 @@
     }
 
     #step-7{
+        margin-left: 18%;
+        margin-top: 30vh;
+    }
+
+    #step-8{
         margin-left: 22%;
         margin-top: 30vh;
     }
 
-    #step-9{
+    #step-10{
         margin-left: 20%;
     }
 

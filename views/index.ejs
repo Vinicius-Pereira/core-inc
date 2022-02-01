@@ -37,6 +37,7 @@
     <script type="text/javascript" src="/js/sendScript.js"></script>
     <script type="text/javascript" src="/js/navbar.js"></script>
     <script type="text/javascript" src="/js/tutorial.js"></script>
+    <script type="text/javascript" src="/js/changeCode.js"></script>
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/tutorial.css" />
@@ -88,13 +89,16 @@
       <div class="balao" id="step-6">Informações sobre os elementos na tela são exibidas aqui de acordo com onde seu mouse está.
         <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
       </div>
-      <div class="balao" id="step-7">Aqui você também pode escolher a linguagem que quer compilar. Por enquanto só temos Pascal.
+      <div class="balao" id="step-7">Aqui você trocar entre os códigos exemplos, se quiser somente testar o Core Inc.
         <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
       </div>
-      <div class="balao" id="step-8">Se você quiser mais informações sobre o projeto e o que ele suporta, acesse as demais páginas.
+      <div class="balao" id="step-8">Aqui você também pode escolher a linguagem que quer compilar. Por enquanto só temos Pascal.
         <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
       </div>
-      <div class="balao" id="step-9">Uma última coisa só! Recomendo que você assista o vídeo introdutório das animações, é importante pra sua imersão ;D 
+      <div class="balao" id="step-9">Se você quiser mais informações sobre o projeto e o que ele suporta, acesse as demais páginas.
+        <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Continuar</button>
+      </div>
+      <div class="balao" id="step-10">Uma última coisa só! Recomendo que você assista o vídeo introdutório das animações, é importante pra sua imersão ;D 
         <button id="yes" class="yes-forward"><i class="fas fa-forward"></i> Finalizar</button>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/0ekg7FmJ2KY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -152,6 +156,10 @@
           <select name="language" id="language">
             <option value="pascal">Pascal</option>
           </select>
+          <button id="change-code">
+            <i class="fas fa-code"></i>
+            + Código
+          </button>
           <button id="help" class="yes-forward" title="Tutorial"><i class="fas fa-question-circle"></i></button>
         </div>
         <div id="script-area"></div>

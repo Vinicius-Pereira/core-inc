@@ -35,7 +35,7 @@ function nextTutorial(step)
     if(step > 0)
     {
         document.getElementById("step-"+(step-1)).style.display = "none";
-        if(step > 9)
+        if(step > 10)
         {
             document.getElementById("tutorial-bg").style.display = "none";
             return;

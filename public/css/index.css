@@ -100,6 +100,28 @@ body {
     transform: translateY(2px);
 }
 
+#change-code {
+    background-color: #5e79f1;
+    border: none;
+    outline: none;
+    padding: 0.4vw 1vw;
+    margin-right: 0.2vw;
+    float: right;
+    font-family: Mecha;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1vw;
+    cursor: pointer;
+}
+
+#change-code:hover {
+    background-color: #5a71db;
+}
+
+#change-code:active {
+    transform: translateY(2px);
+}
+
 #output-area {
     font-family: Mecha;
     font-weight: bold;
